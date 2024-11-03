@@ -2,66 +2,449 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-10">
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center mb-0">Form Information</h2>
+                <h2 class="text-center mb-0">Saudi Visa Application Form</h2>
             </div>
             <div class="card-body">
                 <form method="POST" id="pdfForm">
                     {{ form.csrf_token }}
                     
-                    <div class="mb-3">
-                        {{ form.full_name.label(class="form-label") }}
-                        {{ form.full_name(class="form-control") }}
-                        {% if form.full_name.errors %}
-                            {% for error in form.full_name.errors %}
-                                <div class="invalid-feedback d-block">{{ error }}</div>
-                            {% endfor %}
-                        {% endif %}
+                    <!-- Personal Information Section -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4 class="mb-0">Personal Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    {{ form.first_name.label(class="form-label") }}
+                                    {{ form.first_name(class="form-control") }}
+                                    {% if form.first_name.errors %}
+                                        {% for error in form.first_name.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    {{ form.middle_name.label(class="form-label") }}
+                                    {{ form.middle_name(class="form-control") }}
+                                    {% if form.middle_name.errors %}
+                                        {% for error in form.middle_name.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    {{ form.last_name.label(class="form-label") }}
+                                    {{ form.last_name(class="form-control") }}
+                                    {% if form.last_name.errors %}
+                                        {% for error in form.last_name.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.mother_name.label(class="form-label") }}
+                                    {{ form.mother_name(class="form-control") }}
+                                    {% if form.mother_name.errors %}
+                                        {% for error in form.mother_name.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    {{ form.dob.label(class="form-label") }}
+                                    {{ form.dob(class="form-control", type="date") }}
+                                    {% if form.dob.errors %}
+                                        {% for error in form.dob.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    {{ form.birth_place.label(class="form-label") }}
+                                    {{ form.birth_place(class="form-control") }}
+                                    {% if form.birth_place.errors %}
+                                        {% for error in form.birth_place.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.prev_nationality.label(class="form-label") }}
+                                    {{ form.prev_nationality(class="form-control") }}
+                                    {% if form.prev_nationality.errors %}
+                                        {% for error in form.prev_nationality.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ form.present_nationality.label(class="form-label") }}
+                                    {{ form.present_nationality(class="form-control") }}
+                                    {% if form.present_nationality.errors %}
+                                        {% for error in form.present_nationality.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        {{ form.email.label(class="form-label") }}
-                        {{ form.email(class="form-control", type="email") }}
-                        {% if form.email.errors %}
-                            {% for error in form.email.errors %}
-                                <div class="invalid-feedback d-block">{{ error }}</div>
-                            {% endfor %}
-                        {% endif %}
+                    <!-- Passport Information Section -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4 class="mb-0">Passport Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.pass_issue_place.label(class="form-label") }}
+                                    {{ form.pass_issue_place(class="form-control") }}
+                                    {% if form.pass_issue_place.errors %}
+                                        {% for error in form.pass_issue_place.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ form.pass_num.label(class="form-label") }}
+                                    {{ form.pass_num(class="form-control") }}
+                                    {% if form.pass_num.errors %}
+                                        {% for error in form.pass_num.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.pass_iss.label(class="form-label") }}
+                                    {{ form.pass_iss(class="form-control", type="date") }}
+                                    {% if form.pass_iss.errors %}
+                                        {% for error in form.pass_iss.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ form.pass_exp.label(class="form-label") }}
+                                    {{ form.pass_exp(class="form-control", type="date") }}
+                                    {% if form.pass_exp.errors %}
+                                        {% for error in form.pass_exp.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        {{ form.phone.label(class="form-label") }}
-                        {{ form.phone(class="form-control") }}
-                        {% if form.phone.errors %}
-                            {% for error in form.phone.errors %}
-                                <div class="invalid-feedback d-block">{{ error }}</div>
-                            {% endfor %}
-                        {% endif %}
+                    <!-- Personal Details Section -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4 class="mb-0">Personal Details</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.sex.label(class="form-label") }}
+                                    <div class="d-flex gap-4">
+                                        {% for subfield in form.sex %}
+                                            <div class="form-check">
+                                                {{ subfield(class="form-check-input") }}
+                                                {{ subfield.label(class="form-check-label") }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% if form.sex.errors %}
+                                        {% for error in form.sex.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ form.marital_status.label(class="form-label") }}
+                                    <div class="d-flex gap-4">
+                                        {% for subfield in form.marital_status %}
+                                            <div class="form-check">
+                                                {{ subfield(class="form-check-input") }}
+                                                {{ subfield.label(class="form-check-label") }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% if form.marital_status.errors %}
+                                        {% for error in form.marital_status.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    {{ form.religion.label(class="form-label") }}
+                                    {{ form.religion(class="form-control") }}
+                                    {% if form.religion.errors %}
+                                        {% for error in form.religion.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    {{ form.profession.label(class="form-label") }}
+                                    {{ form.profession(class="form-control") }}
+                                    {% if form.profession.errors %}
+                                        {% for error in form.profession.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    {{ form.qualification.label(class="form-label") }}
+                                    {{ form.qualification(class="form-control") }}
+                                    {% if form.qualification.errors %}
+                                        {% for error in form.qualification.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        {{ form.address.label(class="form-label") }}
-                        {{ form.address(class="form-control", rows="3") }}
-                        {% if form.address.errors %}
-                            {% for error in form.address.errors %}
-                                <div class="invalid-feedback d-block">{{ error }}</div>
-                            {% endfor %}
-                        {% endif %}
+                    <!-- Contact Information Section -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4 class="mb-0">Contact Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    {{ form.address_street.label(class="form-label") }}
+                                    {{ form.address_street(class="form-control") }}
+                                    {% if form.address_street.errors %}
+                                        {% for error in form.address_street.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.address_city.label(class="form-label") }}
+                                    {{ form.address_city(class="form-control") }}
+                                    {% if form.address_city.errors %}
+                                        {% for error in form.address_city.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ form.address_state.label(class="form-label") }}
+                                    {{ form.address_state(class="form-control") }}
+                                    {% if form.address_state.errors %}
+                                        {% for error in form.address_state.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.phone_num.label(class="form-label") }}
+                                    {{ form.phone_num(class="form-control") }}
+                                    {% if form.phone_num.errors %}
+                                        {% for error in form.phone_num.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ form.email.label(class="form-label") }}
+                                    {{ form.email(class="form-control", type="email") }}
+                                    {% if form.email.errors %}
+                                        {% for error in form.email.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        {{ form.comments.label(class="form-label") }}
-                        {{ form.comments(class="form-control", rows="4") }}
-                        {% if form.comments.errors %}
-                            {% for error in form.comments.errors %}
-                                <div class="invalid-feedback d-block">{{ error }}</div>
-                            {% endfor %}
-                        {% endif %}
+                    <!-- Business Information Section -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4 class="mb-0">Business Information (Optional)</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    {{ form.bus_address_street.label(class="form-label") }}
+                                    {{ form.bus_address_street(class="form-control") }}
+                                    {% if form.bus_address_street.errors %}
+                                        {% for error in form.bus_address_street.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    {{ form.bus_address_city.label(class="form-label") }}
+                                    {{ form.bus_address_city(class="form-control") }}
+                                    {% if form.bus_address_city.errors %}
+                                        {% for error in form.bus_address_city.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    {{ form.bus_address_state.label(class="form-label") }}
+                                    {{ form.bus_address_state(class="form-control") }}
+                                    {% if form.bus_address_state.errors %}
+                                        {% for error in form.bus_address_state.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    {{ form.bus_phone_num.label(class="form-label") }}
+                                    {{ form.bus_phone_num(class="form-control") }}
+                                    {% if form.bus_phone_num.errors %}
+                                        {% for error in form.bus_phone_num.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="text-center">
+                    <!-- Visa Information Section -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4 class="mb-0">Visa Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    {{ form.visa_type.label(class="form-label") }}
+                                    {{ form.visa_type(class="form-select") }}
+                                    {% if form.visa_type.errors %}
+                                        {% for error in form.visa_type.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.inviting_name.label(class="form-label") }}
+                                    {{ form.inviting_name(class="form-control") }}
+                                    {% if form.inviting_name.errors %}
+                                        {% for error in form.inviting_name.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    {{ form.inviting_address.label(class="form-label") }}
+                                    {{ form.inviting_address(class="form-control", rows="3") }}
+                                    {% if form.inviting_address.errors %}
+                                        {% for error in form.inviting_address.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Travel Information Section -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h4 class="mb-0">Travel Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    {{ form.arrival_date.label(class="form-label") }}
+                                    {{ form.arrival_date(class="form-control", type="date") }}
+                                    {% if form.arrival_date.errors %}
+                                        {% for error in form.arrival_date.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    {{ form.airline.label(class="form-label") }}
+                                    {{ form.airline(class="form-control") }}
+                                    {% if form.airline.errors %}
+                                        {% for error in form.airline.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    {{ form.flight_num.label(class="form-label") }}
+                                    {{ form.flight_num(class="form-control") }}
+                                    {% if form.flight_num.errors %}
+                                        {% for error in form.flight_num.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    {{ form.departing_city.label(class="form-label") }}
+                                    {{ form.departing_city(class="form-control") }}
+                                    {% if form.departing_city.errors %}
+                                        {% for error in form.departing_city.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    {{ form.arriving_city.label(class="form-label") }}
+                                    {{ form.arriving_city(class="form-control") }}
+                                    {% if form.arriving_city.errors %}
+                                        {% for error in form.arriving_city.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    {{ form.stay_duration.label(class="form-label") }}
+                                    {{ form.stay_duration(class="form-control") }}
+                                    {% if form.stay_duration.errors %}
+                                        {% for error in form.stay_duration.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
                         <button type="submit" class="btn btn-primary">Generate PDF</button>
                     </div>
                 </form>

@@ -1,61 +1,71 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-from reportlab.pdfbase import pdfform
+import io
+from PyPDF2 import PdfWriter
 import os
 
-def create_form_template():
-    # Create the PDF template
-    c = canvas.Canvas("static/templates/form_template.pdf", pagesize=letter)
+def create_template():
+    # Create directory for templates if it doesn't exist
+    template_dir = os.path.join('static', 'templates')
+    os.makedirs(template_dir, exist_ok=True)
     
-    # Set font and size for labels
-    c.setFont("Helvetica-Bold", 12)
+    # Create PDF with form fields
+    output = PdfWriter()
     
-    # Add form fields with proper positioning
-    form = c.acroForm
+    # Create a new PDF with Reportlab
+    packet = io.BytesIO()
+    can = canvas.Canvas(packet, pagesize=letter)
     
-    # Full Name field
-    c.drawString(50, 700, "Full Name:")
-    form.textfield(name='full_name', 
-                  tooltip='Enter your full name',
-                  x=50, y=670, 
-                  width=500, height=30,
-                  maxlen=100)
+    # Add form fields
+    form = output.add_blank_page(letter)
     
-    # Email field
-    c.drawString(50, 620, "Email:")
-    form.textfield(name='email',
-                  tooltip='Enter your email',
-                  x=50, y=590,
-                  width=500, height=30,
-                  maxlen=100)
+    # Personal Information fields
+    form.update_page_form_field_values(
+        form, {
+            'first_name': '',
+            'middle_name': '',
+            'last_name': '',
+            'mother_name': '',
+            'dob': '',
+            'birth_place': '',
+            'prev_nationality': '',
+            'present_nationality': '',
+            'pass_issue_place': '',
+            'pass_num': '',
+            'pass_exp': '',
+            'pass_iss': '',
+            'sex': '',
+            'marital_status': '',
+            'religion': '',
+            'profession': '',
+            'qualification': '',
+            'address_street': '',
+            'address_city': '',
+            'address_state': '',
+            'phone_num': '',
+            'email': '',
+            'bus_address_street': '',
+            'bus_address_city': '',
+            'bus_address_state': '',
+            'bus_phone_num': '',
+            'visa_type': '',
+            'inviting_name': '',
+            'inviting_address': '',
+            'arrival_date': '',
+            'airline': '',
+            'flight_num': '',
+            'departing_city': '',
+            'arriving_city': '',
+            'stay_duration': ''
+        }
+    )
     
-    # Phone field
-    c.drawString(50, 540, "Phone Number:")
-    form.textfield(name='phone',
-                  tooltip='Enter your phone number',
-                  x=50, y=510,
-                  width=500, height=30,
-                  maxlen=15)
+    # Save the template
+    template_path = os.path.join(template_dir, 'saudi_visa_form.pdf')
+    with open(template_path, 'wb') as template_file:
+        output.write(template_file)
     
-    # Address field
-    c.drawString(50, 460, "Address:")
-    form.textfield(name='address',
-                  tooltip='Enter your address',
-                  x=50, y=380,
-                  width=500, height=70)
-    
-    # Comments field
-    c.drawString(50, 330, "Additional Comments:")
-    form.textfield(name='comments',
-                  tooltip='Enter any additional comments',
-                  x=50, y=200,
-                  width=500, height=120)
-    
-    # Save the PDF
-    c.save()
+    print("PDF template created successfully!")
 
 if __name__ == '__main__':
-    # Ensure the directory exists
-    os.makedirs('static/templates', exist_ok=True)
-    create_form_template()
-    print("PDF template created successfully!")
+    create_template()
