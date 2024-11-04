@@ -122,6 +122,10 @@ def index():
             # Read the PDF template
             template_path = os.path.join(app.static_folder, 'templates', 'saudi_visa_form.pdf')
             existing_pdf = PdfReader(template_path)
+            
+            # Debug logging for page count
+            app.logger.info(f"Template PDF contains {len(existing_pdf.pages)} pages")
+            
             output = PdfWriter()
             
             # Prepare form data
@@ -166,15 +170,22 @@ def index():
             # Process each page
             for i in range(len(existing_pdf.pages)):
                 page = existing_pdf.pages[i]
+                app.logger.info(f"Processing page {i+1}")
+                
+                # Create and merge overlay for all pages
                 overlay = PdfReader(create_overlay(form_data, i))
-                if i < 2:  # Only overlay first two pages
-                    page.merge_page(overlay.pages[0])
+                page.merge_page(overlay.pages[0])
+                app.logger.info(f"Added overlay to page {i+1}")
+                
                 output.add_page(page)
+                app.logger.info(f"Added page {i+1} to output PDF")
             
             # Save to memory buffer
             output_buffer = io.BytesIO()
             output.write(output_buffer)
             output_buffer.seek(0)
+            
+            app.logger.info(f"Generated PDF with {len(existing_pdf.pages)} pages")
             
             return send_file(
                 output_buffer,
@@ -184,6 +195,7 @@ def index():
             )
             
         except Exception as e:
+            app.logger.error(f"Error generating PDF: {str(e)}")
             flash(f'Error generating PDF: {str(e)}', 'danger')
             return redirect(url_for('index'))
             
