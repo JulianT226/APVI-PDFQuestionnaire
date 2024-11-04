@@ -10,6 +10,7 @@ body {
 .apvi-navbar {
     background-color: var(--apvi-blue);
     padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
@@ -107,11 +108,17 @@ body {
     border: 1px solid #ced4da;
     padding: 0.75rem 1rem;
     font-size: 1rem;
+    background-color: #fff;
 }
 
 .form-control:focus {
     border-color: var(--apvi-light-blue);
     box-shadow: 0 0 0 0.2rem rgba(43, 75, 129, 0.25);
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+    opacity: 0.8;
 }
 
 .invalid-feedback {
@@ -131,6 +138,17 @@ body {
 .btn-primary:hover {
     background-color: var(--apvi-light-blue);
     border-color: var(--apvi-light-blue);
+}
+
+.btn-outline-primary {
+    color: var(--apvi-blue);
+    border-color: var(--apvi-blue);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--apvi-blue);
+    border-color: var(--apvi-blue);
+    color: white;
 }
 
 .form-check-input:checked {
