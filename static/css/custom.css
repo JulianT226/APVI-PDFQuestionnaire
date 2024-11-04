@@ -1,14 +1,139 @@
-/* Minimal custom styles to complement Bootstrap theme */
-.card {
+:root {
+    --apvi-blue: #2B4B81;
+    --apvi-light-blue: #3A5C92;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.apvi-navbar {
+    background-color: var(--apvi-blue);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white !important;
+    text-decoration: none;
+}
+
+.apvi-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-right: 1rem;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.apvi-text {
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.need-help {
+    color: white;
+    font-size: 0.9rem;
+}
+
+.phone-number {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.phone-number:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.tagline {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/* Form Sections Styling */
+.form-section {
+    background: white;
     border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.section-header {
+    background-color: var(--apvi-blue);
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    background: white;
+    color: var(--apvi-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.section-content {
+    padding: 2rem;
+}
+
+/* Form Controls */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
 }
 
 .form-control:focus {
-    box-shadow: 0 0 0 0.25rem var(--bs-primary-rgb, 0.25);
+    border-color: var(--apvi-light-blue);
+    box-shadow: 0 0 0 0.2rem rgba(43, 75, 129, 0.25);
 }
 
 .invalid-feedback {
     font-size: 0.875rem;
     margin-top: 0.25rem;
+    color: #dc3545;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: var(--apvi-blue);
+    border-color: var(--apvi-blue);
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: var(--apvi-light-blue);
+    border-color: var(--apvi-light-blue);
+}
+
+.form-check-input:checked {
+    background-color: var(--apvi-blue);
+    border-color: var(--apvi-blue);
 }
