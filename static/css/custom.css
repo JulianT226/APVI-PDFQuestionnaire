@@ -55,6 +55,66 @@ body {
     font-style: italic;
 }
 
+/* Progress Steps */
+.progress-container {
+    padding: 2rem 0;
+}
+
+.progress-steps {
+    position: relative;
+    padding: 0 1rem;
+}
+
+.progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e9ecef;
+    z-index: 1;
+}
+
+.progress-step {
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    padding: 0 1rem;
+    text-align: center;
+    flex: 1;
+}
+
+.progress-step .step-number {
+    width: 40px;
+    height: 40px;
+    background: #e9ecef;
+    color: #6c757d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 auto 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.progress-step .step-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
+
+.progress-step.active .step-number {
+    background: var(--apvi-blue);
+    color: white;
+}
+
+.progress-step.active .step-label {
+    color: var(--apvi-blue);
+    font-weight: 500;
+}
+
 /* Form Sections Styling */
 .form-section {
     background: white;
@@ -62,6 +122,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .section-header {
@@ -77,19 +138,6 @@ body {
     margin: 0;
     font-size: 1.25rem;
     font-weight: 500;
-}
-
-.step-number {
-    width: 32px;
-    height: 32px;
-    background: white;
-    color: var(--apvi-blue);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
 }
 
 .section-content {
@@ -154,4 +202,15 @@ body {
 .form-check-input:checked {
     background-color: var(--apvi-blue);
     border-color: var(--apvi-blue);
+}
+
+/* Form Navigation */
+.form-navigation {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.form-navigation .btn {
+    min-width: 120px;
 }
