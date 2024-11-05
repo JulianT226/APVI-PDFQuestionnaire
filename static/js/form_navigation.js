@@ -26,19 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Next/Submit button
-        const nextButton = document.createElement('button');
-        nextButton.type = 'button';  // Always button by default
-        nextButton.className = 'btn btn-primary';
-        
         if (index === formSections.length - 1) {
-            // Replace next button with submit button in last section
+            // Last section - only add submit button
             const submitButton = document.createElement('button');
             submitButton.type = 'submit';
             submitButton.className = 'btn btn-primary ms-auto';
             submitButton.innerHTML = 'Submit Application';
             navButtons.appendChild(submitButton);
         } else {
-            // Regular next button for all other sections
+            // Not last section - add next button
+            const nextButton = document.createElement('button');
+            nextButton.type = 'button';
+            nextButton.className = 'btn btn-primary';
             nextButton.innerHTML = 'Next<i class="fas fa-arrow-right ms-2"></i>';
             nextButton.onclick = () => {
                 if (validateSection(index)) {
