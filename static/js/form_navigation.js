@@ -89,18 +89,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const section = formSections[index];
         let isValid = true;
         
-        // Validate required fields in current section
-        const requiredFields = section.querySelectorAll('[required]');
+        console.log('Validating section:', index);
+        
+        // Only validate fields that are both required and visible
+        const requiredFields = section.querySelectorAll('[required]:not([style*="display: none"])');
+        console.log('Required fields:', requiredFields.length);
+        
         requiredFields.forEach(field => {
-            if (!field.value) {
+            if (!field.value.trim()) {
                 isValid = false;
                 field.classList.add('is-invalid');
-                const feedback = field.nextElementSibling || document.createElement('div');
-                feedback.className = 'invalid-feedback d-block';
-                feedback.textContent = 'This field is required';
-                if (!field.nextElementSibling) {
+                
+                // Create or update feedback message
+                let feedback = field.nextElementSibling;
+                if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+                    feedback = document.createElement('div');
                     field.parentNode.appendChild(feedback);
                 }
+                feedback.className = 'invalid-feedback d-block';
+                feedback.textContent = 'This field is required';
             } else {
                 field.classList.remove('is-invalid');
                 const feedback = field.nextElementSibling;
@@ -110,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        console.log('Validation result:', isValid);
         return isValid;
     }
 });

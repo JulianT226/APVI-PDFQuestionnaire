@@ -7,12 +7,11 @@ class PDFForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired(), Length(max=50)])
     middle_name = StringField('Middle Name', validators=[DataRequired(), Length(max=50)])
     last_name = StringField('Last Name', validators=[DataRequired(), Length(max=50)])
-    mother_name = StringField('Mother\'s Name', validators=[DataRequired(), Length(max=100)])
     dob = DateField('Date of Birth', validators=[DataRequired()])
-    birth_place = StringField('Place of Birth', validators=[DataRequired(), Length(max=100)])
+    birth_place = StringField('Country of Birth', validators=[DataRequired(), Length(max=100)])
     
     # Nationality Information
-    prev_nationality = StringField('Previous Nationality', validators=[DataRequired(), Length(max=50)])
+    prev_nationality = StringField('Previous Nationality', validators=[Optional(), Length(max=50)])
     present_nationality = StringField('Present Nationality', validators=[DataRequired(), Length(max=50)])
     
     # Passport Information
@@ -26,22 +25,24 @@ class PDFForm(FlaskForm):
     marital_status = RadioField('Marital Status', 
                               choices=[('MARRIED', 'Married'), ('SINGLE', 'Single')],
                               validators=[DataRequired()])
-    religion = StringField('Religion', validators=[DataRequired(), Length(max=50)])
+    religion = RadioField('Religion', 
+                          choices=[('MUSLIM', 'Muslim'), ('NON-MUSLIM', 'Non-Muslim')],
+                          validators=[DataRequired()])
     profession = StringField('Profession', validators=[DataRequired(), Length(max=100)])
     qualification = StringField('Qualification', validators=[DataRequired(), Length(max=100)])
     
     # Contact Information
-    address_street = StringField('Street Address', validators=[DataRequired(), Length(max=200)])
+    address_street = StringField('Street', validators=[DataRequired(), Length(max=200)])
     address_city = StringField('City', validators=[DataRequired(), Length(max=100)])
     address_state = StringField('State/Province', validators=[DataRequired(), Length(max=100)])
     phone_num = StringField('Phone Number', validators=[DataRequired(), Length(min=10, max=15)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     
     # Business Information
-    bus_address_street = StringField('Business Street Address', validators=[Optional(), Length(max=200)])
-    bus_address_city = StringField('Business City', validators=[Optional(), Length(max=100)])
-    bus_address_state = StringField('Business State/Province', validators=[Optional(), Length(max=100)])
-    bus_phone_num = StringField('Business Phone Number', validators=[Optional(), Length(min=10, max=15)])
+    bus_address_street = StringField('Employer Street Address', validators=[Optional(), Length(max=200)])
+    bus_address_city = StringField('City', validators=[Optional(), Length(max=100)])
+    bus_address_state = StringField('State/Province', validators=[Optional(), Length(max=100)])
+    bus_phone_num = StringField('Employer Phone Number', validators=[Optional(), Length(min=10, max=15)])
     
     # Visa Information
     visa_type = SelectField('Visa Type', choices=[

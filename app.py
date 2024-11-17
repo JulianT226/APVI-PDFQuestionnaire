@@ -32,7 +32,6 @@ def create_overlay(data, page_number):
         
         can.setFont("Helvetica", 10)
         can.drawString(369, 635, data['last_name'])
-        can.drawString(134, 618, data['mother_name'])
         can.drawString(122, 603, data['dob'])
         can.drawString(385, 603, data['birth_place'])
         can.drawString(156, 587, data['prev_nationality'])
@@ -41,7 +40,6 @@ def create_overlay(data, page_number):
         can.drawString(378, 571, data['pass_num'])
         can.drawString(135, 556, data['pass_exp'])
         can.drawString(378, 556, data['pass_iss'])
-        can.drawString(107, 517, data['religion'])
         can.drawString(113, 502, data['profession'])
         can.drawString(376, 502, data['qualification'])
         
@@ -73,6 +71,11 @@ def create_overlay(data, page_number):
         can.drawString(88, 66, full_name)
         current_date = datetime.today().strftime('%m/%d/%Y')
         can.drawString(485, 66, current_date)
+
+        if data['religion'] == 'MUSLIM':
+            can.drawString(107, 517, 'Muslim')
+        else:
+            can.drawString(107, 517, 'Non-Muslim')
         
         # Handle radio button selections with X marks
         can.setFont("Helvetica-Bold", 12)
@@ -85,7 +88,7 @@ def create_overlay(data, page_number):
             can.drawString(365, 530, 'X')
         elif data['marital_status'] == 'SINGLE':
             can.drawString(412, 531, 'X')
-            
+        
         # Visa type X marks
         visa_coordinates = {
             'EMPLOYMENT': (105, 398),
@@ -133,7 +136,6 @@ def index():
                 'first_name': form.first_name.data,
                 'middle_name': form.middle_name.data,
                 'last_name': form.last_name.data,
-                'mother_name': form.mother_name.data,
                 'dob': form.dob.data.strftime('%m/%d/%Y'),
                 'birth_place': form.birth_place.data,
                 'prev_nationality': form.prev_nationality.data,
