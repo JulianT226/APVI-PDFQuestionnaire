@@ -17,8 +17,8 @@ class PDFForm(FlaskForm):
     # Passport Information
     pass_issue_place = StringField('Passport Issue Place', validators=[DataRequired(), Length(max=100)])
     pass_num = StringField('Passport Number', validators=[DataRequired(), Length(max=20)])
-    pass_exp = DateField('Passport Expiry Date', validators=[DataRequired()])
-    pass_iss = DateField('Passport Issue Date', validators=[DataRequired()])
+    pass_exp = DateField('Expiry Date', validators=[DataRequired()])
+    pass_iss = DateField('Issue Date', validators=[DataRequired()])
     
     # Personal Details
     sex = RadioField('Sex', choices=[('MALE', 'Male'), ('FEMALE', 'Female')], validators=[DataRequired()])
@@ -39,7 +39,7 @@ class PDFForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     
     # Business Information
-    bus_address_street = StringField('Employer Street Address', validators=[Optional(), Length(max=200)])
+    bus_address_street = StringField('Street', validators=[Optional(), Length(max=200)])
     bus_address_city = StringField('City', validators=[Optional(), Length(max=100)])
     bus_address_state = StringField('State/Province', validators=[Optional(), Length(max=100)])
     bus_phone_num = StringField('Employer Phone Number', validators=[Optional(), Length(min=10, max=15)])
@@ -70,9 +70,9 @@ class PDFForm(FlaskForm):
     inviting_address = TextAreaField('Inviting Person/Organization Address', validators=[DataRequired(), Length(max=500)])
     
     # Travel Information
-    arrival_date = DateField('Arrival Date', validators=[DataRequired()])
-    airline = StringField('Airline', validators=[DataRequired(), Length(max=100)])
-    flight_num = StringField('Flight Number', validators=[DataRequired(), Length(max=20)])
-    departing_city = StringField('Departing City', validators=[DataRequired(), Length(max=100)])
-    arriving_city = StringField('Arriving City', validators=[DataRequired(), Length(max=100)])
-    stay_duration = StringField('Duration of Stay', validators=[DataRequired(), Length(max=50)])
+    arrival_date = DateField('Arrival Date', validators=[Optional()])
+    airline = StringField('Airline', validators=[Optional(), Length(max=100)])
+    flight_num = StringField('Flight Number', validators=[Optional(), Length(max=20)])
+    departing_city = StringField('Departing City', validators=[Optional(), Length(max=100)])
+    arriving_city = StringField('Arriving City', validators=[Optional(), Length(max=100)])
+    stay_duration = StringField('Duration of Stay', validators=[Optional(), Length(max=50)])

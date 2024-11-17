@@ -7,6 +7,12 @@ body {
     background-color: #f8f9fa;
 }
 
+.required::after {
+    content: '*';
+    color: #dc3545;
+    margin-left: 4px;
+}
+
 .apvi-navbar {
     background-color: var(--apvi-blue);
     padding: 1rem 0;
