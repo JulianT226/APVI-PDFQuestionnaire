@@ -14,7 +14,7 @@
                 </div>
                 <div class="section-content">
                     <div class="mb-3">
-                        <label class="form-label">Full Name <span style="color: red">*</span></label>
+                        <label class="form-label required">Full Name</label>
                         <div class="row g-3">
                             <div class="col-md-4">
                                 {{ form.first_name(class="form-control", placeholder="First name") }}
@@ -45,7 +45,7 @@
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label class="form-label" for="{{ form.dob.id }}">{{ form.dob.label.text }} <span style="color: red">*</span></label>
+                            {{ form.dob.label(class="form-label required") }}
                             {{ form.dob(class="form-control", type="date") }}
                             {% if form.dob.errors %}
                                 {% for error in form.dob.errors %}
@@ -54,7 +54,7 @@
                             {% endif %}
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label" for="{{ form.birth_place.id }}">{{ form.birth_place.label.text }} <span style="color: red">*</span></label>
+                            {{ form.birth_place.label(class="form-label required") }}
                             {{ form.birth_place(class="form-control", placeholder="Enter Country of birth") }}
                             {% if form.birth_place.errors %}
                                 {% for error in form.birth_place.errors %}
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.present_nationality.id }}">{{ form.present_nationality.label.text }} <span style="color: red">*</span></label>
+                        {{ form.present_nationality.label(class="form-label required") }}
                         {{ form.present_nationality(class="form-control", placeholder="Enter current nationality") }}
                         {% if form.present_nationality.errors %}
                             {% for error in form.present_nationality.errors %}
@@ -74,26 +74,25 @@
                         {% endif %}
                     </div>
                     
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Do you have a previous nationality?<span style="color: red">*</span></label>
-                            <div class="d-flex gap-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="has_prev_nationality" id="prevNationalityYes" onclick="togglePrevNationality(true)">
-                                    <label class="form-check-label" for="prevNationalityYes">Yes</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="has_prev_nationality" id="prevNationalityNo" onclick="togglePrevNationality(false)">
-                                    <label class="form-check-label" for="prevNationalityNo">No</label>
-                                </div>
+                    <!-- Previous Nationality Question -->
+                    <div class="col-md-4">
+                        <label class="form-label required">Do you have a previous nationality?</label>
+                        <div class="radio-card-group">
+                            <div class="radio-card">
+                                <input type="radio" name="has_prev_nationality" id="prevNationalityYes" onclick="togglePrevNationality(true)">
+                                <label for="prevNationalityYes">Yes</label>
+                            </div>
+                            <div class="radio-card">
+                                <input type="radio" name="has_prev_nationality" id="prevNationalityNo" onclick="togglePrevNationality(false)">
+                                <label for="prevNationalityNo">No</label>
                             </div>
                         </div>
                     </div>
 
                     <!-- Previous Nationality Field (hidden by default) -->
-                    <div class="row g-6 mb-6" id="prevNationalityField" style="display: none;">
+                    <div class="row g-3 mb-3" id="prevNationalityField" style="display: none;">
                         <div class="col-md-6">
-                            <label class="form-label" for="{{ form.prev_nationality.id }}">{{ form.prev_nationality.label.text }}<span style="color: red">*</span></label>
+                            {{ form.prev_nationality.label(class="form-label required") }}
                             {{ form.prev_nationality(class="form-control", placeholder="Enter previous nationality") }}
                             {% if form.prev_nationality.errors %}
                                 {% for error in form.prev_nationality.errors %}
@@ -102,8 +101,8 @@
                             {% endif %}
                         </div>
                     </div>
-                    </div>
-                    </div>
+                </div>
+            </div>
 
             <script>
                 function togglePrevNationality(show) {
@@ -111,8 +110,6 @@
                     prevNationalityField.style.display = show ? 'block' : 'none';
                 }
             </script>
-
-
 
             <!-- Personal Details Section -->
             <div class="form-section mb-4">
@@ -123,7 +120,7 @@
                 <div class="section-content">
                     <div class="row g-4 mb-4">
                         <div class="col-md-4">
-                            <label class="form-label required" for="{{ form.sex.id }}">{{ form.sex.label.text }}</label>
+                            {{ form.sex.label(class="form-label required") }}
                             <div class="radio-card-group">
                                 {% for subfield in form.sex %}
                                     <div class="radio-card">
@@ -134,7 +131,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label required" for="{{ form.marital_status.id }}">{{ form.marital_status.label.text }}</label>
+                            {{ form.marital_status.label(class="form-label required") }}
                             <div class="radio-card-group">
                                 {% for subfield in form.marital_status %}
                                     <div class="radio-card">
@@ -145,7 +142,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label required" for="{{ form.religion.id }}">{{ form.religion.label.text }}</label>
+                            {{ form.religion.label(class="form-label required") }}
                             <div class="radio-card-group">
                                 {% for subfield in form.religion %}
                                     <div class="radio-card">
@@ -158,8 +155,8 @@
                     </div>
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label">
-                                Job Title<span style="color: red">*</span>
+                            <label class="form-label required">
+                                Job Title
                                 <span 
                                     class="text-primary ms-1" 
                                     data-bs-toggle="tooltip" 
@@ -176,8 +173,8 @@
                             {% endif %}
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">
-                                Highest Degree Earned<span style="color: red">*</span>
+                            <label class="form-label required">
+                                Highest Degree Earned
                                 <span 
                                     class="text-primary ms-1" 
                                     data-bs-toggle="tooltip" 
@@ -197,7 +194,6 @@
                 </div>
             </div>
 
-            
             <!-- Contact Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
@@ -206,7 +202,7 @@
                 </div>
                 <div class="section-content">
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.email.id }}">{{ form.email.label.text }}<span style="color: red">*</span></label>
+                        {{ form.email.label(class="form-label required") }}
                         {{ form.email(class="form-control", placeholder="Enter email address") }}
                         {% if form.email.errors %}
                             {% for error in form.email.errors %}
@@ -216,7 +212,7 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.phone_num.id }}">{{ form.phone_num.label.text }}<span style="color: red">*</span></label>
+                        {{ form.phone_num.label(class="form-label required") }}
                         {{ form.phone_num(class="form-control", placeholder="Enter phone number") }}
                         {% if form.phone_num.errors %}
                             {% for error in form.phone_num.errors %}
@@ -230,7 +226,7 @@
                     <div class="mb-4">
                         <label class="form-label"><strong>Home Address</strong></label>
                         <div class="mb-3">
-                            <label class="form-label" for="{{ form.address_street.id }}">{{ form.address_street.label.text }}<span style="color: red">*</span></label>
+                            {{ form.address_street.label(class="form-label required") }}
                             {{ form.address_street(class="form-control", placeholder="Enter street address") }}
                             {% if form.address_street.errors %}
                                 {% for error in form.address_street.errors %}
@@ -240,7 +236,7 @@
                         </div>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label" for="{{ form.address_city.id }}">{{ form.address_city.label.text }}<span style="color: red">*</span></label>
+                                {{ form.address_city.label(class="form-label required") }}
                                 {{ form.address_city(class="form-control", placeholder="Enter city") }}
                                 {% if form.address_city.errors %}
                                     {% for error in form.address_city.errors %}
@@ -249,7 +245,7 @@
                                 {% endif %}
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label" for="{{ form.address_state.id }}">{{ form.address_state.label.text }}<span style="color: red">*</span></label>
+                                {{ form.address_state.label(class="form-label required") }}
                                 {{ form.address_state(class="form-control", placeholder="Enter state") }}
                                 {% if form.address_state.errors %}
                                     {% for error in form.address_state.errors %}
@@ -269,9 +265,8 @@
                     <h3>Employment Information</h3>
                 </div>
                 <div class="section-content">
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Employer Address
+                    <div class="mb-4">
+                        <label class="form-label"><strong>Employer Address</strong>
                             <span 
                                 class="text-primary ms-1" 
                                 data-bs-toggle="tooltip" 
@@ -281,41 +276,56 @@
                             </span>
                         </label>
                         <div class="mb-3">
-                            {{ form.bus_address_street.label(class="form-label") }}
-                            {{ form.bus_address_street(class="form-control", placeholder="Enter your employer\'s street address") }}
+                            {{ form.bus_address_street(class="form-control", placeholder="Enter your employer's street address") }}
                             {% if form.bus_address_street.errors %}
                                 {% for error in form.bus_address_street.errors %}
                                     <div class="invalid-feedback d-block">{{ error }}</div>
                                 {% endfor %}
                             {% endif %}
                         </div>
-                    </div>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            {{ form.bus_address_city.label(class="form-label") }}
-                            {{ form.bus_address_city(class="form-control", placeholder="Enter city") }}
-                            {% if form.bus_address_city.errors %}
-                                {% for error in form.bus_address_city.errors %}
-                                    <div class="invalid-feedback d-block">{{ error }}</div>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form.bus_address_state.label(class="form-label") }}
-                            {{ form.bus_address_state(class="form-control", placeholder="Enter state/province") }}
-                            {% if form.bus_address_state.errors %}
-                                {% for error in form.bus_address_state.errors %}
-                                    <div class="invalid-feedback d-block">{{ error }}</div>
-                                {% endfor %}
-                            {% endif %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                {{ form.bus_address_city(class="form-control", placeholder="Enter city") }}
+                                {% if form.bus_address_city.errors %}
+                                    {% for error in form.bus_address_city.errors %}
+                                        <div class="invalid-feedback d-block">{{ error }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.bus_address_state(class="form-control", placeholder="Enter state") }}
+                                {% if form.bus_address_state.errors %}
+                                    {% for error in form.bus_address_state.errors %}
+                                        <div class="invalid-feedback d-block">{{ error }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
+            <!-- Invitation Details Section -->
+            <div class="form-section mb-4">
+                <div class="section-header">
+                    <div class="step-number">5</div>
+                    <h3>Invitation Details</h3>
+                </div>
+                <div class="section-content">
                     <div class="mb-3">
-                        {{ form.bus_phone_num.label(class="form-label") }}
-                        {{ form.bus_phone_num(class="form-control", placeholder="Enter your employer\'s phone number") }}
-                        {% if form.bus_phone_num.errors %}
-                            {% for error in form.bus_phone_num.errors %}
+                        {{ form.inviting_name.label(class="form-label required") }}
+                        {{ form.inviting_name(class="form-control", placeholder="Enter inviting person or organization name") }}
+                        {% if form.inviting_name.errors %}
+                            {% for error in form.inviting_name.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.inviting_address.label(class="form-label required") }}
+                        {{ form.inviting_address(class="form-control", placeholder="Enter complete address") }}
+                        {% if form.inviting_address.errors %}
+                            {% for error in form.inviting_address.errors %}
                                 <div class="invalid-feedback d-block">{{ error }}</div>
                             {% endfor %}
                         {% endif %}
@@ -326,12 +336,12 @@
             <!-- Passport Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">5</div>
+                    <div class="step-number">6</div>
                     <h3>Passport Information</h3>
                 </div>
                 <div class="section-content">
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.pass_num.id }}">{{ form.pass_num.label.text }}<span style="color: red">*</span></label>
+                        {{ form.pass_num.label(class="form-label required") }}
                         {{ form.pass_num(class="form-control", placeholder="Enter passport number") }}
                         {% if form.pass_num.errors %}
                             {% for error in form.pass_num.errors %}
@@ -341,17 +351,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">
-                            Country of Issue<span style="color: red"">*</span>
-                            <span 
-                                class="text-primary ms-1" 
-                                data-bs-toggle="tooltip" 
-                                data-bs-placement="right" 
-                                title="Only enter the country of issue, do NOT enter a state/province.">
-                                <i class="bi bi-info-circle"></i>
-                            </span>
-                        </label>
-                        {{ form.pass_issue_place(class="form-control", placeholder="Enter country") }}
+                        {{ form.pass_issue_place.label(class="form-label required") }}
+                        {{ form.pass_issue_place(class="form-control", placeholder="Enter place of issue") }}
                         {% if form.pass_issue_place.errors %}
                             {% for error in form.pass_issue_place.errors %}
                                 <div class="invalid-feedback d-block">{{ error }}</div>
@@ -361,7 +362,7 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label class="form-label" for="{{ form.pass_iss.id }}">{{ form.pass_iss.label.text }}<span style="color: red">*</span></label>
+                            {{ form.pass_iss.label(class="form-label required") }}
                             {{ form.pass_iss(class="form-control", type="date") }}
                             {% if form.pass_iss.errors %}
                                 {% for error in form.pass_iss.errors %}
@@ -370,7 +371,7 @@
                             {% endif %}
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label" for="{{ form.pass_exp.id }}">{{ form.pass_exp.label.text }}<span style="color: red">*</span></label>
+                            {{ form.pass_exp.label(class="form-label required") }}
                             {{ form.pass_exp(class="form-control", type="date") }}
                             {% if form.pass_exp.errors %}
                                 {% for error in form.pass_exp.errors %}
@@ -381,49 +382,19 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Visa Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">6</div>
+                    <div class="step-number">7</div>
                     <h3>Visa Information</h3>
                 </div>
                 <div class="section-content">
                     <div class="mb-3">
-                        {{ form.visa_type.label(class="form-label") }}
+                        {{ form.visa_type.label(class="form-label required") }}
                         {{ form.visa_type(class="form-select") }}
                         {% if form.visa_type.errors %}
                             {% for error in form.visa_type.errors %}
-                                <div class="invalid-feedback d-block">{{ error }}</div>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                    <hr class="my-4">
-                    <label class="form-label">
-                        <strong>Inviting Person/Organization</strong>
-                        <span 
-                            class="text-primary ms-1" 
-                            data-bs-toggle="tooltip" 
-                            data-bs-placement="right" 
-                            title="If the applicant is a child, leave blank and move to the next step.">
-                            <i class="bi bi-info-circle"></i>
-                        </span>
-                    </label>
-                    <div class="mb-6">
-                        Name<span style="color: red">*</span>
-                        {{ form.inviting_name(class="form-control", placeholder="Enter name of inviting person/organization") }}
-                        {% if form.inviting_name.errors %}
-                            {% for error in form.inviting_name.errors %}
-                                <div class="invalid-feedback d-block">{{ error }}</div>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-
-                    <div class="mb-3">
-                        Address<span style="color: red">*</span>
-                        {{ form.inviting_address(class="form-control", rows="3", placeholder="Enter address of inviting person/organization") }}
-                        {% if form.inviting_address.errors %}
-                            {% for error in form.inviting_address.errors %}
                                 <div class="invalid-feedback d-block">{{ error }}</div>
                             {% endfor %}
                         {% endif %}
@@ -434,12 +405,12 @@
             <!-- Travel Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">7</div>
+                    <div class="step-number">8</div>
                     <h3>Travel Information</h3>
                 </div>
                 <div class="section-content">
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.arrival_date.id }}">{{ form.arrival_date.label.text }}<span style="color: red">*</span></label>
+                        {{ form.arrival_date.label(class="form-label required") }}
                         {{ form.arrival_date(class="form-control", type="date") }}
                         {% if form.arrival_date.errors %}
                             {% for error in form.arrival_date.errors %}
@@ -450,46 +421,7 @@
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">
-                                Departing City<span style="color: red"">*</span>
-                                <span 
-                                    class="text-primary ms-1" 
-                                    data-bs-toggle="tooltip" 
-                                    data-bs-placement="right" 
-                                    title="Enter the last city you will depart from before arriving in Saudi Arabia.">
-                                    <i class="bi bi-info-circle"></i>
-                                </span>
-                            </label>
-                            {{ form.departing_city(class="form-control", placeholder="Enter departing city") }}
-                            {% if form.departing_city.errors %}
-                                {% for error in form.departing_city.errors %}
-                                    <div class="invalid-feedback d-block">{{ error }}</div>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">
-                                Arriving City<span style="color: red"">*</span>
-                                <span 
-                                    class="text-primary ms-1" 
-                                    data-bs-toggle="tooltip" 
-                                    data-bs-placement="right" 
-                                    title="Enter your city of arrival in Saudi Arabia.">
-                                    <i class="bi bi-info-circle"></i>
-                                </span>
-                            </label>
-                            {{ form.arriving_city(class="form-control", placeholder="Enter arriving city") }}
-                            {% if form.arriving_city.errors %}
-                                {% for error in form.arriving_city.errors %}
-                                    <div class="invalid-feedback d-block">{{ error }}</div>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
-                    </div>
-                    
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            {{ form.airline.label(class="form-label") }}
+                            {{ form.airline.label(class="form-label required") }}
                             {{ form.airline(class="form-control", placeholder="Enter airline name") }}
                             {% if form.airline.errors %}
                                 {% for error in form.airline.errors %}
@@ -498,7 +430,7 @@
                             {% endif %}
                         </div>
                         <div class="col-md-6">
-                            {{ form.flight_num.label(class="form-label") }}
+                            {{ form.flight_num.label(class="form-label required") }}
                             {{ form.flight_num(class="form-control", placeholder="Enter flight number") }}
                             {% if form.flight_num.errors %}
                                 {% for error in form.flight_num.errors %}
@@ -508,8 +440,29 @@
                         </div>
                     </div>
 
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            {{ form.departing_city.label(class="form-label required") }}
+                            {{ form.departing_city(class="form-control", placeholder="Enter departing city") }}
+                            {% if form.departing_city.errors %}
+                                {% for error in form.departing_city.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.arriving_city.label(class="form-label required") }}
+                            {{ form.arriving_city(class="form-control", placeholder="Enter arriving city") }}
+                            {% if form.arriving_city.errors %}
+                                {% for error in form.arriving_city.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
                     <div class="mb-3">
-                        {{ form.stay_duration.label(class="form-label") }}
+                        {{ form.stay_duration.label(class="form-label required") }}
                         {{ form.stay_duration(class="form-control", placeholder="Enter duration of stay") }}
                         {% if form.stay_duration.errors %}
                             {% for error in form.stay_duration.errors %}
@@ -518,7 +471,6 @@
                         {% endif %}
                     </div>
                 </div>
-            </div>
             </div>
         </form>
     </div>
