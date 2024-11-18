@@ -106,7 +106,7 @@ def create_overlay(data, page_number):
             'GOVERNMENT': (413, 376),
             'WORK VISIT': (477, 375),
             'FAMILY VISIT': (541, 375),
-            'OTHERS': (478, 352),
+            'OTHER': (478, 352),
             'COMPANION': (542, 352)
         }
         if data['visa_type'] in visa_coordinates:

@@ -13,6 +13,42 @@ body {
     margin-left: 4px;
 }
 
+.radio-card-group {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+
+.radio-card {
+    flex: 1;
+    position: relative;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.radio-card input[type="radio"] {
+    display: none;
+}
+
+.radio-card label {
+    display: block;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0;
+    text-align: center;
+}
+
+.radio-card input[type="radio"]:checked + label {
+    background-color: var(--apvi-blue);
+    color: white;
+}
+
+.radio-card:hover {
+    border-color: var(--apvi-blue);
+}
+
 .apvi-navbar {
     background-color: var(--apvi-blue);
     padding: 1rem 0;
