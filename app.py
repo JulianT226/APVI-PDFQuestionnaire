@@ -1,6 +1,31 @@
 import os
+import tempfile
+import uuid
+import glob
+from datetime import datetime, timedelta
 from flask import Flask, render_template, request, send_file, flash, redirect, url_for
 from flask import session
+import io
+
+app = Flask(__name__, static_folder=os.path.abspath('static'))
+app.config['SECRET_KEY'] = os.urandom(24)
+
+def format_date(date_obj):
+    """Safely format date objects that might be None"""
+    return date_obj.strftime('%m/%d/%Y') if date_obj else ''
+
+TEMP_DIR = tempfile.gettempdir()
+
+def cleanup_temp_files():
+    """Remove PDF files older than 1 hour"""
+    cutoff = datetime.now() - timedelta(hours=1)
+    pattern = os.path.join(TEMP_DIR, '*.pdf')
+    for f in glob.glob(pattern):
+        if datetime.fromtimestamp(os.path.getctime(f)) < cutoff:
+            try:
+                os.remove(f)
+            except OSError:
+                pass
 from flask_wtf import CSRFProtect
 from PyPDF2 import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
@@ -124,10 +149,16 @@ def create_overlay(data, page_number):
 def download_pdf():
     if 'pdf_download' not in session:
         return redirect(url_for('index'))
-        
+    
     pdf_data = session['pdf_download']
+    pdf_path = os.path.join(TEMP_DIR, f"{pdf_data['id']}.pdf")
+    
+    if not os.path.exists(pdf_path):
+        flash('PDF file not found', 'error')
+        return redirect(url_for('index'))
+    
     return send_file(
-        io.BytesIO(pdf_data['buffer']),
+        pdf_path,
         mimetype='application/pdf',
         as_attachment=True,
         download_name=pdf_data['filename']
@@ -160,14 +191,14 @@ def index():
                 'first_name': form.first_name.data,
                 'middle_name': form.middle_name.data,
                 'last_name': form.last_name.data,
-                'dob': form.dob.data.strftime('%m/%d/%Y'),
+                'dob': format_date(form.dob.data),
                 'birth_place': form.birth_place.data,
                 'prev_nationality': form.prev_nationality.data,
                 'present_nationality': form.present_nationality.data,
                 'pass_issue_place': form.pass_issue_place.data,
                 'pass_num': form.pass_num.data,
-                'pass_exp': form.pass_exp.data.strftime('%m/%d/%Y'),
-                'pass_iss': form.pass_iss.data.strftime('%m/%d/%Y'),
+                'pass_exp': format_date(form.pass_exp.data),
+                'pass_iss': format_date(form.pass_iss.data),
                 'sex': form.sex.data,
                 'marital_status': form.marital_status.data,
                 'religion': form.religion.data,
@@ -187,7 +218,7 @@ def index():
                 'inviting_address_street': form.inviting_address_street.data,
                 'inviting_address_city': form.inviting_address_city.data,
                 'inviting_address_province': form.inviting_address_province.data,
-                'arrival_date': form.arrival_date.data.strftime('%m/%d/%Y'),
+                'arrival_date': format_date(form.arrival_date.data),
                 'airline': form.airline.data,
                 'flight_num': form.flight_num.data,
                 'departing_city': form.departing_city.data,
@@ -208,19 +239,23 @@ def index():
                 output.add_page(page)
                 app.logger.info(f"Added page {i+1} to output PDF")
             
-            # Save to memory buffer
-            output_buffer = io.BytesIO()
-            output.write(output_buffer)
-            output_buffer.seek(0)
+            # Clean up old temporary files
+            cleanup_temp_files()
             
             app.logger.info(f"Generated PDF with {len(existing_pdf.pages)} pages")
             
-            # Generate a unique filename
+            # Generate unique ID and filename for this PDF
+            pdf_id = str(uuid.uuid4())
             filename = f'saudi_visa_application_{form.last_name.data}.pdf'
+            pdf_path = os.path.join(TEMP_DIR, f"{pdf_id}.pdf")
             
-            # Store the PDF in a temporary session variable
+            # Save PDF to temp file
+            with open(pdf_path, 'wb') as f:
+                output.write(f)
+            
+            # Store only the ID and filename in session
             session['pdf_download'] = {
-                'buffer': output_buffer.getvalue(),
+                'id': pdf_id,
                 'filename': filename
             }
             
