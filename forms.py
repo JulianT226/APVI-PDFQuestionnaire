@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SelectField, RadioField, DateField
+from wtforms import StringField, SelectField, RadioField, DateField
 from wtforms.validators import DataRequired, Email, Length, Optional
 
 class PDFForm(FlaskForm):
@@ -11,6 +11,7 @@ class PDFForm(FlaskForm):
     birth_place = StringField('Country of Birth', validators=[DataRequired(), Length(max=100)])
     
     # Nationality Information
+    has_prev_nationality = RadioField('Do you have a previous nationality?', choices=[('Yes', 'Yes'), ('No', 'No')], validators=[DataRequired()])
     prev_nationality = StringField('Previous Nationality', validators=[Optional(), Length(max=50)])
     present_nationality = StringField('Current Nationality', validators=[DataRequired(), Length(max=50)])
     
@@ -66,8 +67,10 @@ class PDFForm(FlaskForm):
     ], validators=[DataRequired()])
     
     # Invitation Details
-    inviting_name = StringField('Inviting Person/Organization Name', validators=[DataRequired(), Length(max=200)])
-    inviting_address = TextAreaField('Inviting Person/Organization Address', validators=[DataRequired(), Length(max=500)])
+    inviting_name = StringField('Name', validators=[DataRequired(), Length(max=200)])
+    inviting_address_street = StringField('Street', validators=[Optional(), Length(max=200)])
+    inviting_address_city = StringField('City', validators=[Optional(), Length(max=100)])
+    inviting_address_province = StringField('Province', validators=[Optional(), Length(max=100)])
     
     # Travel Information
     arrival_date = DateField('Arrival Date', validators=[DataRequired()])

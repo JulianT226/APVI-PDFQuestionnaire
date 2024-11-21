@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, request, send_file, flash, redirect, url_for
+from flask import session
 from flask_wtf import CSRFProtect
 from PyPDF2 import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
@@ -56,9 +57,11 @@ def create_overlay(data, page_number):
         can.drawString(55, 430, full_bus_address)
         can.drawString(320, 430, data.get('bus_phone_num', ''))
         
-        # Invitation details
-        inviting_name_address = f"{data['inviting_name']}, {data['inviting_address']}"
-        can.drawString(55, 302, inviting_name_address)
+        # Invitation details'
+        full_inviting_address = ""
+        if data['inviting_address_street']:
+            full_inviting_address = f"{data['inviting_name']}, {data['inviting_address_street']}, {data['inviting_address_city']}, {data['inviting_address_province']}"
+        can.drawString(55, 302, full_inviting_address)
         can.drawString(209, 261, data['arrival_date'])
         can.drawString(370, 261, data['airline'])
         can.drawString(486, 261, data['flight_num'])
@@ -117,6 +120,27 @@ def create_overlay(data, page_number):
     packet.seek(0)
     return packet
 
+@app.route('/download-pdf')
+def download_pdf():
+    if 'pdf_download' not in session:
+        return redirect(url_for('index'))
+        
+    pdf_data = session['pdf_download']
+    return send_file(
+        io.BytesIO(pdf_data['buffer']),
+        mimetype='application/pdf',
+        as_attachment=True,
+        download_name=pdf_data['filename']
+    )
+
+@app.route('/success')
+def success():
+    if 'pdf_download' not in session:
+        return redirect(url_for('index'))
+    
+    download_url = url_for('download_pdf')
+    return render_template('success.html', download_url=download_url)
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = PDFForm()
@@ -160,7 +184,9 @@ def index():
                 'bus_phone_num': form.bus_phone_num.data,
                 'visa_type': form.visa_type.data,
                 'inviting_name': form.inviting_name.data,
-                'inviting_address': form.inviting_address.data,
+                'inviting_address_street': form.inviting_address_street.data,
+                'inviting_address_city': form.inviting_address_city.data,
+                'inviting_address_province': form.inviting_address_province.data,
                 'arrival_date': form.arrival_date.data.strftime('%m/%d/%Y'),
                 'airline': form.airline.data,
                 'flight_num': form.flight_num.data,
@@ -189,12 +215,17 @@ def index():
             
             app.logger.info(f"Generated PDF with {len(existing_pdf.pages)} pages")
             
-            return send_file(
-                output_buffer,
-                mimetype='application/pdf',
-                as_attachment=True,
-                download_name=f'saudi_visa_application_{form.last_name.data}.pdf'
-            )
+            # Generate a unique filename
+            filename = f'saudi_visa_application_{form.last_name.data}.pdf'
+            
+            # Store the PDF in a temporary session variable
+            session['pdf_download'] = {
+                'buffer': output_buffer.getvalue(),
+                'filename': filename
+            }
+            
+            # Redirect to success page
+            return redirect(url_for('success'))
             
         except Exception as e:
             app.logger.error(f"Error generating PDF: {str(e)}")
