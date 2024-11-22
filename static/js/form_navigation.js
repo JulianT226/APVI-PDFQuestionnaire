@@ -56,13 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Next/Submit button
-        if (index === formSections.length - 1) {
+        if (index === formSections.length - 2) {
             // Last section - only add submit button
             const submitButton = document.createElement('button');
             submitButton.type = 'submit';
             submitButton.className = 'btn btn-primary ms-auto';
             submitButton.innerHTML = 'Submit Application';
             navButtons.appendChild(submitButton);
+        if (index === formSections.length - 1)
+            
         } else {
             // Not last section - add next button
             const nextButton = document.createElement('button');
