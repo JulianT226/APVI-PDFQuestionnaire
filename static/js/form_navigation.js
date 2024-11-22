@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const formSections = document.querySelectorAll('.form-section');
     const form = document.getElementById('pdfForm');
+    if (!form) {
+        // The form doesn't exist, so exit the script.
+        return;
+    }
+    const formSections = form.querySelectorAll('.form-section');
     let currentSection = 0;
+    // Rest of your code...
 
     const usStates = [
         'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 
@@ -56,15 +61,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Next/Submit button
-        if (index === formSections.length - 2) {
+        if (index === formSections.length - 1) {
             // Last section - only add submit button
             const submitButton = document.createElement('button');
             submitButton.type = 'submit';
             submitButton.className = 'btn btn-primary ms-auto';
-            submitButton.innerHTML = 'Submit Application';
+            submitButton.innerHTML = 'Download Application';
             navButtons.appendChild(submitButton);
-        if (index === formSections.length - 1)
-            
+
         } else {
             // Not last section - add next button
             const nextButton = document.createElement('button');

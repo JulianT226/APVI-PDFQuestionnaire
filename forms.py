@@ -4,17 +4,20 @@ from wtforms.validators import DataRequired, Email, Length, Optional
 
 class PDFForm(FlaskForm):
     # Order Information
-    order_for = RadioField('Who are you ordering for?', 
-                          choices=[('MYSELF', 'Myself'), 
-                                 ('MYSELF_AND_OTHERS', 'Myself and other(s)'),
-                                 ('OTHERS', 'Other(s)')],
-                          validators=[DataRequired()])
+    ordering_for = RadioField(
+        'Who are you ordering for?',
+        choices=[
+            ('Myself', 'Myself'),
+            ('Myself and other(s)', 'Myself and other(s)'),
+            ('Other(s)', 'Other(s)')
+        ],
+        validators=[DataRequired()]
+    )
     
     # Personal Information
     first_name = StringField('First Name', validators=[DataRequired(), Length(max=50)])
     middle_name = StringField('Middle Name', validators=[DataRequired(), Length(max=50)])
     last_name = StringField('Last Name', validators=[DataRequired(), Length(max=50)])
-    mother_name = StringField('Mother\'s Name', validators=[DataRequired(), Length(max=100)])
     dob = DateField('Date of Birth', validators=[DataRequired()])
     birth_place = StringField('Country of Birth', validators=[DataRequired(), Length(max=100)])
     
