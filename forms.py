@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, RadioField, DateField
-from wtforms.validators import DataRequired, Email, Length, Optional
+from wtforms.validators import DataRequired, Email, Length, Optional, data_required
 
 class PDFForm(FlaskForm):
     # Order Information
@@ -16,7 +16,7 @@ class PDFForm(FlaskForm):
     
     # Personal Information
     first_name = StringField('First Name', validators=[DataRequired(), Length(max=50)])
-    middle_name = StringField('Middle Name', validators=[DataRequired(), Length(max=50)])
+    middle_name = StringField('Middle Name', validators=[Optional(), Length(max=50)])
     last_name = StringField('Last Name', validators=[DataRequired(), Length(max=50)])
     dob = DateField('Date of Birth', validators=[DataRequired()])
     birth_place = StringField('Country of Birth', validators=[DataRequired(), Length(max=100)])
@@ -35,11 +35,11 @@ class PDFForm(FlaskForm):
     # Personal Details
     sex = RadioField('Sex', choices=[('MALE', 'Male'), ('FEMALE', 'Female')], validators=[DataRequired()])
     marital_status = RadioField('Marital Status', 
-                              choices=[('MARRIED', 'Married'), ('SINGLE', 'Single')],
-                              validators=[DataRequired()])
+                             choices=[('MARRIED', 'Married'), ('SINGLE', 'Single')],
+                             validators=[DataRequired()])
     religion = RadioField('Religion', 
-                          choices=[('MUSLIM', 'Muslim'), ('NON-MUSLIM', 'Non-Muslim')],
-                          validators=[DataRequired()])
+                         choices=[('MUSLIM', 'Muslim'), ('NON-MUSLIM', 'Non-Muslim')],
+                         validators=[DataRequired()])
     profession = StringField('Profession', validators=[DataRequired(), Length(max=100)])
     qualification = StringField('Qualification', validators=[DataRequired(), Length(max=100)])
     
@@ -89,4 +89,11 @@ class PDFForm(FlaskForm):
     flight_num = StringField('Flight Number', validators=[Optional(), Length(max=20)])
     departing_city = StringField('Departing City', validators=[DataRequired(), Length(max=100)])
     arriving_city = StringField('Arriving City', validators=[DataRequired(), Length(max=100)])
-    stay_duration = StringField('Duration of Stay', validators=[Optional(), Length(max=50)])
+    stay_duration = StringField('e.g. "2 weeks"', validators=[Optional(), Length(max=50)])
+
+    # Traveling Companion
+    is_child = RadioField('Is this application for a child?', choices=[('Yes', 'Yes'), ('No', 'No')], validators=[DataRequired()])
+    traveling_companion_first_name = StringField('Name of Traveling Companion', validators=[Optional(), Length(max=200)])
+    traveling_companion_middle_name = StringField('Middle Name of Traveling Companion', validators=[Optional(), Length(max=100)])
+    traveling_companion_last_name = StringField('Last Name of Traveling Companion', validators=[Optional(), Length(max=100)])
+    traveling_companion_relationship = StringField("Applicant's Relationship with Traveling Companion", validators=[Optional(), Length(max=100)])

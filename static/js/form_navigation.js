@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const formSections = form.querySelectorAll('.form-section');
     let currentSection = 0;
-    // Rest of your code...
 
     const usStates = [
         'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 
@@ -49,15 +48,18 @@ document.addEventListener('DOMContentLoaded', function() {
     formSections.forEach((section, index) => {
         const navButtons = document.createElement('div');
         navButtons.className = 'form-navigation d-flex justify-content-between mt-4';
-        
+
+        const leftContainer = document.createElement('div');
+        const rightContainer = document.createElement('div');
+
         // Previous button (except for first section)
         if (index > 0) {
             const prevButton = document.createElement('button');
             prevButton.type = 'button';
-            prevButton.className = 'btn btn-outline-primary';
+            prevButton.className = 'btn btn-outline-primary ms-3';
             prevButton.innerHTML = '<i class="fas fa-arrow-left me-2"></i>Previous';
             prevButton.onclick = () => navigateSection(index - 1);
-            navButtons.appendChild(prevButton);
+            leftContainer.appendChild(prevButton);
         }
         
         // Next/Submit button
@@ -67,18 +69,18 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.type = 'submit';
             submitButton.className = 'btn btn-primary ms-auto';
             submitButton.innerHTML = 'Download Application';
-            navButtons.appendChild(submitButton);
+            rightContainer.appendChild(submitButton);
 
         } else {
             // Not last section - add next button
-            const nextButton = document.createElement('button');
-            nextButton.type = 'button';
-            nextButton.className = 'btn btn-primary';
-            nextButton.innerHTML = 'Next<i class="fas fa-arrow-right ms-2"></i>';
+            navigationButton = document.createElement('button');
+            navigationButton.type = 'button';
+            navigationButton.className = 'btn btn-primary';
+            navigationButton.innerHTML = 'Next<i class="fas fa-arrow-right ms-2"></i>';
             
             if (index === 1) {
                 // Special handling for step 2
-                nextButton.onclick = () => {
+                navigationButton.onclick = () => {
                     if (validateSection(index)) {
                         // Show the confirmation modal
                         const jobTitleModal = new bootstrap.Modal(document.getElementById('jobTitleModal'));
@@ -88,14 +90,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 };
             } else {
-                nextButton.onclick = () => {
+                navigationButton.onclick = () => {
                     if (validateSection(index)) {
                         navigateSection(index + 1);
                     }
                 };
             }
-            navButtons.appendChild(nextButton);
+            rightContainer.appendChild(navigationButton);
         }
+
+        navButtons.appendChild(leftContainer);
+        navButtons.appendChild(rightContainer);
         
         section.querySelector('.section-content').appendChild(navButtons);
     });
@@ -148,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         requiredFields.forEach(field => {
             if (field.type === 'radio') {
+                const parent = field.closest('.radio-card-group') || field.parentNode;
                 const name = field.name;
                 if (!checkedRadioGroups[name]) {
                     const checkedRadio = section.querySelector(`input[name="${name}"]:checked`);
@@ -159,12 +165,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             radio.classList.add('is-invalid');
                         });
                         // Create or update feedback message
-                        let feedback = radioGroupContainer.nextElementSibling;
-                        if (!feedback || !feedback.classList.contains('invalid-feedback') ) {
+                        let feedback = parent.querySelector('.invalid-feedback');
+                        if (!feedback) {
                             feedback = document.createElement('div');
                             feedback.className = 'invalid-feedback d-block';
                             feedback.textContent = 'Please select an option.';
-                            radioGroupContainer.parentNode.insertBefore(feedback, radioGroupContainer.nextSibling);
+                            parent.appendChild(feedback);
                         }
                     } else {
                         // Remove invalid class from all radios in the group

@@ -58,7 +58,11 @@ def create_template():
             'flight_num': '',
             'departing_city': '',
             'arriving_city': '',
-            'stay_duration': ''
+            'stay_duration': '',
+            'traveling_companion_first_name': '',
+            'traveling_companion_middle_name': '',
+            'traveling_companion_last_name': '',
+            'traveling_companion_relationship': ''
         }
     )
     

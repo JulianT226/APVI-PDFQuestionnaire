@@ -283,3 +283,21 @@ body {
     background-color: var(--apvi-blue);
     border-color: var(--apvi-blue);
 }
+
+/* Next Steps Styling */
+.next-steps-heading {
+    font-size: 1.75rem; /* Larger heading font size */
+    font-weight: bold;
+    margin-bottom: 1.5rem; /* Increased spacing below */
+}
+
+.next-steps-container {
+    font-size: 1.25rem; /* Larger font for list items */
+    padding: 25px; /* More padding inside the container */
+    margin-bottom: 2rem; /* Keep sufficient spacing below */
+}
+
+.list-group-item {
+    font-size: 1.2rem; /* Slightly larger font size for items */
+    padding: 20px; /* Increased padding for better spacing */
+}

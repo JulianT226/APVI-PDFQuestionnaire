@@ -6,36 +6,10 @@
         <form method="POST" id="pdfForm">
             {{ form.csrf_token }}
             
-            <!-- Order Information Section -->
-            <div class="form-section mb-4">
-                <div class="section-header">
-                    <div class="step-number">1</div>
-                    <h3>Order Information</h3>
-                </div>
-                <div class="section-content">
-                    <div class="mb-4">
-                        <label class="form-label">{{ form.ordering_for.label.text }}<span style="color: red">*</span></label>
-                        <div class="radio-stack">
-                            {% for subfield in form.ordering_for %}
-                            <div class="form-check mb-2">
-                                {{ subfield(class="form-check-input", required=true) }}
-                                <label class="form-check-label" for="{{ subfield.id }}">{{ subfield.label.text }}</label>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        {% if form.ordering_for.errors %}
-                            {% for error in form.ordering_for.errors %}
-                                <div class="invalid-feedback d-block">{{ error }}</div>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-
             <!-- Personal Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">2</div>
+                    <div class="step-number">1</div>
                     <h3>Personal Information</h3>
                 </div>
                 <div class="section-content">
@@ -568,6 +542,75 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Child Applicant Section -->
+            <div class="form-section mb-4">
+                <div class="section-header">
+                    <div class="step-number">8</div>
+                    <h3>Child Applicant Information</h3>
+                </div>
+                <div class="section-content">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            {{ form.is_child.label(class="form-label") }}<span style="color: red">*</span>
+                            <div class="radio-card-group">
+                                {% for subfield in form.is_child %}
+                                <div class="radio-card">
+                                    <input type="radio" id="{{ subfield.id }}" name="{{ subfield.name }}" value="{{ subfield.data }}" {% if subfield.checked %}checked{% endif %} required onclick="toggleTravelingCompanion({{ 'true' if subfield.data == 'Yes' else 'false' }})">
+                                    <label for="{{ subfield.id }}">{{ subfield.label.text }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Traveling Companion Field (hidden by default) -->
+                    <div class="row g-3 mb-3" id="travelingCompanionField" style="display: none;">
+                        <div class="mb-3">
+                            <label class="form-label">Name of Adult Traveling with the Applicant<span style="color: red">*</span></label>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    {{ form.traveling_companion_first_name(class="form-control", placeholder="First Name") }}
+                                    {% if form.traveling_companion_first_name.errors %}
+                                        {% for error in form.traveling_companion_first_name.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form.traveling_companion_middle_name(class="form-control", placeholder="Middle Name") }}
+                                    {% if form.traveling_companion_middle_name.errors %}
+                                        {% for error in form.traveling_companion_middle_name.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form.traveling_companion_last_name(class="form-control", placeholder="Last Name") }}
+                                    {% if form.traveling_companion_last_name.errors %}
+                                        {% for error in form.traveling_companion_last_name.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Relationship with the Applicant<span style="color: red">*</span></label>
+                            {{ form.traveling_companion_relationship(class="form-control", placeholder="Enter relationship with the applicant") }}
+                            {% if form.traveling_companion_relationship.errors %}
+                                {% for error in form.traveling_companion_relationship.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                <script>
+                    function toggleTravelingCompanion(show) {
+                        const travelingCompanionField = document.getElementById('travelingCompanionField');
+                        travelingCompanionField.style.display = show ? 'block' : 'none';
+                    }
+                </script>
             </div>
         </form>
     </div>

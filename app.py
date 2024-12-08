@@ -93,6 +93,12 @@ def create_overlay(data, page_number):
         can.drawString(161, 245, data['departing_city'])
         can.drawString(451, 245, data['arriving_city'])
         can.drawString(216, 230, data['stay_duration'])
+
+        # Traveling companion
+        traveling_companion_name = f"{data['traveling_companion_first_name']} {data['traveling_companion_middle_name']} {data['traveling_companion_last_name']}"
+        can.drawString(203, 198, traveling_companion_name)
+        can.drawString(507, 198, data['traveling_companion_relationship'])
+        
         
         # Name and date at bottom
         full_name = f"{data['first_name']} {data['middle_name']} {data['last_name']}"
@@ -223,7 +229,11 @@ def index():
                 'flight_num': form.flight_num.data,
                 'departing_city': form.departing_city.data,
                 'arriving_city': form.arriving_city.data,
-                'stay_duration': form.stay_duration.data
+                'stay_duration': form.stay_duration.data,
+                'traveling_companion_first_name': form.traveling_companion_first_name.data,
+                'traveling_companion_middle_name': form.traveling_companion_middle_name.data,
+                'traveling_companion_last_name': form.traveling_companion_last_name.data,
+                'traveling_companion_relationship': form.traveling_companion_relationship.data
             }
             
             # Process each page
