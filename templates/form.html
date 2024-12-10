@@ -6,10 +6,29 @@
         <form method="POST" id="pdfForm">
             {{ form.csrf_token }}
             
-            <!-- Personal Information Section -->
+            <!-- State Selection Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
                     <div class="step-number">1</div>
+                    <h3>State Selection</h3>
+                </div>
+                <div class="section-content">
+                    <div class="mb-4">
+                        <label class="form-label">{{ form.state.label.text }}<span style="color: red">*</span></label>
+                        {{ form.state(class="form-select") }}
+                        {% if form.state.errors %}
+                            {% for error in form.state.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Information Section -->
+            <div class="form-section mb-4">
+                <div class="section-header">
+                    <div class="step-number">2</div>
                     <h3>Personal Information</h3>
                 </div>
                 <div class="section-content">
@@ -65,7 +84,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.present_nationality.id }}">{{ form.present_nationality.label.text }} <span style="color: red">*</span></label>
+                        <label class="form-label" for="{{ form.present_nationality.id }}">{{ form.present_nationality.label.text }}<span style="color: red">*</span></label>
                         {{ form.present_nationality(class="form-control", placeholder="Enter current nationality") }}
                         {% if form.present_nationality.errors %}
                             {% for error in form.present_nationality.errors %}
@@ -114,7 +133,7 @@
             <!-- Personal Details Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">2</div>
+                    <div class="step-number">3</div>
                     <h3>Personal Details</h3>
                 </div>
                 <div class="section-content">
@@ -201,7 +220,7 @@
             <!-- Contact Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">3</div>
+                    <div class="step-number">4</div>
                     <h3>Contact Information</h3>
                 </div>
                 <div class="section-content">
@@ -265,7 +284,7 @@
             <!-- Employment Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">4</div>
+                    <div class="step-number">5</div>
                     <h3>Employment Information</h3>
                 </div>
                 <div class="section-content">
@@ -326,7 +345,7 @@
             <!-- Passport Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">5</div>
+                    <div class="step-number">6</div>
                     <h3>Passport Information</h3>
                 </div>
                 <div class="section-content">
@@ -385,7 +404,7 @@
             <!-- Visa Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">6</div>
+                    <div class="step-number">7</div>
                     <h3>Visa Information</h3>
                 </div>
                 <div class="section-content">
@@ -457,7 +476,7 @@
             <!-- Travel Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">7</div>
+                    <div class="step-number">8</div>
                     <h3>Travel Information</h3>
                 </div>
                 <div class="section-content">
@@ -546,7 +565,7 @@
             <!-- Child Applicant Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">8</div>
+                    <div class="step-number">9</div>
                     <h3>Child Applicant Information</h3>
                 </div>
                 <div class="section-content">
