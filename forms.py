@@ -1,22 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, RadioField, DateField
+from wtforms import StringField, SelectField, RadioField, DateField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length, Optional
 
 class PDFForm(FlaskForm):
-    # Order Type Selection
-    order_type = RadioField(
-        'Who are you ordering for?',
-        choices=[
-            ('MYSELF', 'Myself'),
-            ('MYSELF_AND_OTHERS', 'Myself and other(s)'),
-            ('OTHERS', 'Other(s)')
-        ],
-        validators=[DataRequired()]
-    )
     
     # State Selection
     state = SelectField(
-        'Select Your State',
+        'What state do you currently live in?',
         choices=[
             ('AL', 'Alabama'), ('AK', 'Alaska'), ('AZ', 'Arizona'), ('AR', 'Arkansas'),
             ('CA', 'California'), ('CO', 'Colorado'), ('CT', 'Connecticut'), ('DE', 'Delaware'),
@@ -131,4 +121,40 @@ class PDFForm(FlaskForm):
     traveling_companion_relationship = StringField(
         "Applicant's Relationship with Traveling Companion",
         validators=[Optional(), Length(max=100)]
+    )
+    
+    # Purpose of Travel
+    purpose_of_travel = TextAreaField(
+        'Purpose of Travel',
+        validators=[DataRequired(), Length(max=500)],
+        description='Please provide detailed information about the purpose of your visit'
+    )
+    
+    # Emergency Contact
+    emergency_contact_name = StringField(
+        'Emergency Contact Name',
+        validators=[DataRequired(), Length(max=100)]
+    )
+    emergency_contact_relationship = StringField(
+        'Relationship',
+        validators=[DataRequired(), Length(max=50)]
+    )
+    emergency_contact_phone = StringField(
+        'Emergency Contact Phone',
+        validators=[DataRequired(), Length(min=10, max=15)]
+    )
+    
+    # Previous Visa Information
+    had_previous_visa = RadioField(
+        'Have you previously been issued a Saudi visa?',
+        choices=[('Yes', 'Yes'), ('No', 'No')],
+        validators=[DataRequired()]
+    )
+    previous_visa_number = StringField(
+        'Previous Visa Number',
+        validators=[Optional(), Length(max=20)]
+    )
+    previous_visa_date = DateField(
+        'Previous Visa Issue Date',
+        validators=[Optional()]
     )

@@ -1,8 +1,7 @@
 import os
 # States that use the NY form template
 NY_FORM_STATES = ['IN', 'PA', 'RI', 'VT', 'CT', 'MA', 'MI', 'ME', 'NH', 'NJ', 'NY']
-# States that use the NY form template
-NY_FORM_STATES = ['IN', 'PA', 'RI', 'VT', 'CT', 'MA', 'MI', 'ME', 'NH', 'NJ', 'NY']
+
 import tempfile
 import uuid
 import glob
@@ -187,7 +186,6 @@ def index():
     form = PDFForm()
     if form.validate_on_submit():
         try:
-            # Read the PDF template
             # Select template based on state
             state = form.state.data
             template_name = 'saudi_visa_form_ny.pdf' if state in NY_FORM_STATES else 'saudi_visa_form.pdf'
