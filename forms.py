@@ -3,6 +3,17 @@ from wtforms import StringField, SelectField, RadioField, DateField
 from wtforms.validators import DataRequired, Email, Length, Optional
 
 class PDFForm(FlaskForm):
+    # Order Type Selection
+    order_type = RadioField(
+        'Who are you ordering for?',
+        choices=[
+            ('MYSELF', 'Myself'),
+            ('MYSELF_AND_OTHERS', 'Myself and other(s)'),
+            ('OTHERS', 'Other(s)')
+        ],
+        validators=[DataRequired()]
+    )
+    
     # State Selection
     state = SelectField(
         'Select Your State',

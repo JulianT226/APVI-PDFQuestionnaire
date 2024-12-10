@@ -6,10 +6,33 @@
         <form method="POST" id="pdfForm">
             {{ form.csrf_token }}
             
-            <!-- State Selection Section -->
+            <!-- Order Type Selection Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
                     <div class="step-number">1</div>
+                    <h3>Who are you ordering for?</h3>
+                </div>
+                <div class="section-content">
+                    <div class="radio-stack">
+                        {% for subfield in form.order_type %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input") }}
+                            {{ subfield.label(class="form-check-label") }}
+                        </div>
+                        {% endfor %}
+                        {% if form.order_type.errors %}
+                            {% for error in form.order_type.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- State Selection Section -->
+            <div class="form-section mb-4">
+                <div class="section-header">
+                    <div class="step-number">2</div>
                     <h3>State Selection</h3>
                 </div>
                 <div class="section-content">
@@ -28,7 +51,7 @@
             <!-- Personal Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">2</div>
+                    <div class="step-number">3</div>
                     <h3>Personal Information</h3>
                 </div>
                 <div class="section-content">
@@ -133,7 +156,7 @@
             <!-- Personal Details Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">3</div>
+                    <div class="step-number">4</div>
                     <h3>Personal Details</h3>
                 </div>
                 <div class="section-content">
@@ -220,7 +243,7 @@
             <!-- Contact Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">4</div>
+                    <div class="step-number">5</div>
                     <h3>Contact Information</h3>
                 </div>
                 <div class="section-content">
@@ -284,7 +307,7 @@
             <!-- Employment Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">5</div>
+                    <div class="step-number">6</div>
                     <h3>Employment Information</h3>
                 </div>
                 <div class="section-content">
@@ -345,7 +368,7 @@
             <!-- Passport Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">6</div>
+                    <div class="step-number">7</div>
                     <h3>Passport Information</h3>
                 </div>
                 <div class="section-content">
@@ -404,7 +427,7 @@
             <!-- Visa Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">7</div>
+                    <div class="step-number">8</div>
                     <h3>Visa Information</h3>
                 </div>
                 <div class="section-content">
@@ -476,7 +499,7 @@
             <!-- Travel Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
-                    <div class="step-number">8</div>
+                    <div class="step-number">9</div>
                     <h3>Travel Information</h3>
                 </div>
                 <div class="section-content">

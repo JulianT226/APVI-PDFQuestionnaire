@@ -1,6 +1,8 @@
 import os
 # States that use the NY form template
 NY_FORM_STATES = ['IN', 'PA', 'RI', 'VT', 'CT', 'MA', 'MI', 'ME', 'NH', 'NJ', 'NY']
+# States that use the NY form template
+NY_FORM_STATES = ['IN', 'PA', 'RI', 'VT', 'CT', 'MA', 'MI', 'ME', 'NH', 'NJ', 'NY']
 import tempfile
 import uuid
 import glob

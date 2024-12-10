@@ -1,7 +1,7 @@
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 import io
-from PyPDF2 import PdfWriter
+from PyPDF2 import PdfWriter, PdfReader
 import os
 
 def create_template():
@@ -9,62 +9,39 @@ def create_template():
     template_dir = os.path.join('static', 'templates')
     os.makedirs(template_dir, exist_ok=True)
     
-    # Create PDF with form fields
-    output = PdfWriter()
-    
-    # Create a new PDF with Reportlab
+    # Create first page with ReportLab
     packet = io.BytesIO()
     can = canvas.Canvas(packet, pagesize=letter)
     
-    # Add form fields
-    form = output.add_blank_page(letter)
+    # Add some basic layout elements for the first page
+    can.setFont("Helvetica-Bold", 16)
+    can.drawString(200, 750, "Saudi Visa Application Form")
+    can.setFont("Helvetica", 12)
+    can.drawString(100, 700, "Personal Information")
+    can.drawString(100, 400, "Contact Information")
+    can.drawString(100, 200, "Declaration")
+    can.save()
     
-    # Personal Information fields
-    form.update_page_form_field_values(
-        form, {
-            'first_name': '',
-            'middle_name': '',
-            'last_name': '',
-            'mother_name': '',
-            'dob': '',
-            'birth_place': '',
-            'prev_nationality': '',
-            'present_nationality': '',
-            'pass_issue_place': '',
-            'pass_num': '',
-            'pass_exp': '',
-            'pass_iss': '',
-            'sex': '',
-            'marital_status': '',
-            'religion': '',
-            'profession': '',
-            'qualification': '',
-            'address_street': '',
-            'address_city': '',
-            'address_state': '',
-            'phone_num': '',
-            'email': '',
-            'bus_address_street': '',
-            'bus_address_city': '',
-            'bus_address_state': '',
-            'bus_phone_num': '',
-            'visa_type': '',
-            'inviting_name': '',
-            'inviting_address_street': '',
-            'inviting_address_city': '',
-            'inviting_address_province': '',
-            'arrival_date': '',
-            'airline': '',
-            'flight_num': '',
-            'departing_city': '',
-            'arriving_city': '',
-            'stay_duration': '',
-            'traveling_companion_first_name': '',
-            'traveling_companion_middle_name': '',
-            'traveling_companion_last_name': '',
-            'traveling_companion_relationship': ''
-        }
-    )
+    # Create second page
+    packet2 = io.BytesIO()
+    can2 = canvas.Canvas(packet2, pagesize=letter)
+    can2.setFont("Helvetica-Bold", 14)
+    can2.drawString(100, 750, "Additional Information")
+    can2.drawString(100, 500, "Travel Details")
+    can2.save()
+    
+    # Create PDF writer and add pages
+    output = PdfWriter()
+    
+    # Add first page
+    packet.seek(0)
+    new_pdf = PdfReader(packet)
+    output.add_page(new_pdf.pages[0])
+    
+    # Add second page
+    packet2.seek(0)
+    new_pdf2 = PdfReader(packet2)
+    output.add_page(new_pdf2.pages[0])
     
     # Save the template
     template_path = os.path.join(template_dir, 'saudi_visa_form.pdf')
