@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <form method="POST" action="{{ url_for('submit_form') }}">
+            {{ form.csrf_token }}
+            <input type="hidden" name="confirmed" value="true">
+            
+            <div class="form-section mb-4">
+                <div class="section-header">
+                    <h3>Review Your Information</h3>
+                    <p class="text-muted">Please review all information carefully before submitting.</p>
+                </div>
+                
+                <!-- Visa Selection -->
+                <div class="review-section">
+                    <h4 class="review-section-title">Visa Selection</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Consulate Office:</strong> {{ form.state.data }}</p>
+                            <p><strong>Visa Type:</strong> {{ form.visa_type.data }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="review-section">
+                    <h4 class="review-section-title">Personal Information</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Full Name:</strong> {{ form.first_name.data }} {{ form.middle_name.data }} {{ form.last_name.data }}</p>
+                            <p><strong>Date of Birth:</strong> {{ form.dob.data.strftime('%m/%d/%Y') }}</p>
+                            <p><strong>Birth Place:</strong> {{ form.birth_place.data }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Present Nationality:</strong> {{ form.present_nationality.data }}</p>
+                            {% if form.has_prev_nationality.data == 'Yes' %}
+                            <p><strong>Previous Nationality:</strong> {{ form.prev_nationality.data }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Details -->
+                <div class="review-section">
+                    <h4 class="review-section-title">Personal Details</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Sex:</strong> {{ form.sex.data }}</p>
+                            <p><strong>Marital Status:</strong> {{ form.marital_status.data }}</p>
+                            <p><strong>Religion:</strong> {{ form.religion.data }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Profession:</strong> {{ form.profession.data }}</p>
+                            <p><strong>Qualification:</strong> {{ form.qualification.data }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="review-section">
+                    <h4 class="review-section-title">Contact Information</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Email:</strong> {{ form.email.data }}</p>
+                            <p><strong>Phone:</strong> {{ form.phone_num.data }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Address:</strong><br>
+                                {{ form.address_street.data }}<br>
+                                {{ form.address_city.data }}, {{ form.address_state.data }}<br>
+                                {{ form.address_country.data }} {{ form.address_zip.data }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passport Information -->
+                <div class="review-section">
+                    <h4 class="review-section-title">Passport Information</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Passport Number:</strong> {{ form.pass_num.data }}</p>
+                            <p><strong>Issue Place:</strong> {{ form.pass_issue_place.data }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Issue Date:</strong> {{ form.pass_iss.data.strftime('%m/%d/%Y') }}</p>
+                            <p><strong>Expiration Date:</strong> {{ form.pass_exp.data.strftime('%m/%d/%Y') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Travel Information -->
+                <div class="review-section">
+                    <h4 class="review-section-title">Travel Information</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Arrival Date:</strong> {{ form.arrival_date.data.strftime('%m/%d/%Y') }}</p>
+                            <p><strong>Stay Duration:</strong> {{ form.stay_duration.data }}</p>
+                            <p><strong>Airline:</strong> {{ form.airline.data }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Departing City:</strong> {{ form.departing_city.data }}</p>
+                            <p><strong>Arriving City:</strong> {{ form.arriving_city.data }}</p>
+                            {% if form.flight_num.data %}
+                            <p><strong>Flight Number:</strong> {{ form.flight_num.data }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-navigation mt-4">
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Edit Information
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check me-2"></i>Confirm & Generate PDF
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+.review-section {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.review-section-title {
+    color: #0d6efd;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #dee2e6;
+}
+</style>
+{% endblock %}
