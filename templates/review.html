@@ -6,13 +6,13 @@
         <form method="POST" action="{{ url_for('submit_form') }}">
             {{ form.csrf_token }}
             <input type="hidden" name="confirmed" value="true">
-            
+
             <div class="form-section mb-4">
                 <div class="section-header">
                     <h3>Review Your Information</h3>
                     <p class="text-muted">Please review all information carefully before submitting.</p>
                 </div>
-                
+
                 <!-- Visa Selection -->
                 <div class="review-section">
                     <h4 class="review-section-title">Visa Selection</h4>
@@ -97,8 +97,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <p><strong>Arrival Date:</strong> {{ form.arrival_date.data.strftime('%m/%d/%Y') }}</p>
-                            <p><strong>Stay Duration:</strong> {{ form.stay_duration.data }}</p>
+                            {% if form.departure_date.data %}
+                            <p><strong>Departure Date:</strong> {{ form.departure_date.data.strftime('%m/%d/%Y') }}</p>
+                            {% endif %}
+                            {% if form.airline.data %}
                             <p><strong>Airline:</strong> {{ form.airline.data }}</p>
+                            {% endif %}
                         </div>
                         <div class="col-md-6">
                             <p><strong>Departing City:</strong> {{ form.departing_city.data }}</p>
@@ -106,9 +110,35 @@
                             {% if form.flight_num.data %}
                             <p><strong>Flight Number:</strong> {{ form.flight_num.data }}</p>
                             {% endif %}
+                            {% if form.stay_duration.data %}
+                            <p><strong>Stay Duration:</strong> {{ form.stay_duration.data }}</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
+
+                {% if form.traveling_companion_first_name.data %}
+                <!-- Traveling Companion -->
+                <div class="review-section">
+                    <h4 class="review-section-title">Traveling Companion</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Name:</strong> {{ form.traveling_companion_first_name.data }} {{ form.traveling_companion_middle_name.data }} {{ form.traveling_companion_last_name.data }}</p>
+                            {% if form.traveling_companion_dob.data %}
+                            <p><strong>Date of Birth:</strong> {{ form.traveling_companion_dob.data.strftime('%m/%d/%Y') }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            {% if form.traveling_companion_sex.data %}
+                            <p><strong>Sex:</strong> {{ form.traveling_companion_sex.data }}</p>
+                            {% endif %}
+                            {% if form.traveling_companion_relationship.data %}
+                            <p><strong>Relationship:</strong> {{ form.traveling_companion_relationship.data }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
 
                 <div class="form-navigation mt-4">
                     <a href="{{ url_for('index') }}" class="btn btn-secondary">

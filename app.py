@@ -309,7 +309,7 @@ def index():
             'inviting_address_postal_code': form.inviting_address_postal_code.data,
             'inviting_address_country': form.inviting_address_country.data,
             'arrival_date': form.arrival_date.data.strftime('%Y-%m-%d'),
-            'departure_date': form.departure_date.data.strftime('%Y-%m-%d'),
+            'departure_date': form.departure_date.data.strftime('%Y-%m-%d') if form.departure_date.data else None,
             'airline': form.airline.data,
             'flight_num': form.flight_num.data,
             'departing_city': form.departing_city.data,
@@ -318,7 +318,7 @@ def index():
             'traveling_companion_first_name': form.traveling_companion_first_name.data,
             'traveling_companion_middle_name': form.traveling_companion_middle_name.data,
             'traveling_companion_last_name': form.traveling_companion_last_name.data,
-            'traveling_companion_dob': form.traveling_companion_dob.data.strftime('%Y-%m-%d'),
+            'traveling_companion_dob': form.traveling_companion_dob.data.strftime('%Y-%m-%d') if form.traveling_companion_dob.data else None,
             'traveling_companion_sex': form.traveling_companion_sex.data or '',
             'traveling_companion_relationship': form.traveling_companion_relationship.data
         }
@@ -341,8 +341,8 @@ def review_form():
     form.pass_exp.data = datetime.strptime(form_data['pass_exp'], '%Y-%m-%d').date()
     form.pass_iss.data = datetime.strptime(form_data['pass_iss'], '%Y-%m-%d').date()
     form.arrival_date.data = datetime.strptime(form_data['arrival_date'], '%Y-%m-%d').date()
-    form.departure_date.data = datetime.strptime(form_data['departure_date'], '%Y-%m-%d').date()
-    form.traveling_companion_dob.data = datetime.strptime(form_data['traveling_companion_dob'], '%Y-%m-%d').date()
+    form.departure_date.data = datetime.strptime(form_data['departure_date'], '%Y-%m-%d').date() if form_data['departure_date'] else None
+    form.traveling_companion_dob.data = datetime.strptime(form_data['traveling_companion_dob'], '%Y-%m-%d').date() if form_data['traveling_companion_dob'] else None
 
 
     # Populate other fields
@@ -416,7 +416,7 @@ def submit_form():
             'inviting_address_postal_code': form_data['inviting_address_postal_code'],
             'inviting_address_country': form_data['inviting_address_country'],
             'arrival_date': datetime.strptime(form_data['arrival_date'], '%Y-%m-%d').strftime('%m/%d/%Y'),
-            'departure_date': datetime.strptime(form_data['departure_date'], '%Y-%m-%d').strftime('%m/%d/%Y'),
+            'departure_date': datetime.strptime(form_data['departure_date'], '%Y-%m-%d').strftime('%m/%d/%Y') if form_data['departure_date'] else None,
             'airline': form_data['airline'],
             'flight_num': form_data['flight_num'],
             'departing_city': form_data['departing_city'],
@@ -425,7 +425,7 @@ def submit_form():
             'traveling_companion_first_name': form_data['traveling_companion_first_name'],
             'traveling_companion_middle_name': form_data['traveling_companion_middle_name'],
             'traveling_companion_last_name': form_data['traveling_companion_last_name'],
-            'traveling_companion_dob': datetime.strptime(form_data['traveling_companion_dob'], '%Y-%m-%d').strftime('%m/%d/%Y'),
+            'traveling_companion_dob': datetime.strptime(form_data['traveling_companion_dob'], '%Y-%m-%d').strftime('%m/%d/%Y') if form_data['traveling_companion_dob'] else None,
             'traveling_companion_sex': form_data['traveling_companion_sex'],
             'traveling_companion_relationship': form_data['traveling_companion_relationship']
         }
