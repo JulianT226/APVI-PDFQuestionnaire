@@ -23,7 +23,19 @@
                         {% endif %}
                     </div>
                     <div class="mb-3">
-                        {{ form.visa_type.label(class="form-label") }}
+                        <label class="form-label">{{ form.visa_type.label.text }}
+                            <i class="fas fa-info-circle ms-1" 
+                               data-tippy-content="<div class='tooltip-title'>Visa Type Guide</div>
+                               <p>Select the visa type that best matches your travel purpose:</p>
+                               <ul>
+                                 <li><strong>Tourist:</strong> For leisure travel</li>
+                                 <li><strong>Business:</strong> For business meetings</li>
+                                 <li><strong>Work:</strong> For employment</li>
+                                 <li><strong>Student:</strong> For education</li>
+                               </ul>
+                               <p>Click 'What visa is right for me?' below for more details.</p>">
+                            </i>
+                        </label>
                         {{ form.visa_type(class="form-select") }}
                         {% if form.visa_type.errors %}
                             {% for error in form.visa_type.errors %}
@@ -206,14 +218,6 @@
                 </div>
             </div>
 
-            <script>
-                function togglePrevNationality(show) {
-                    const prevNationalityField = document.getElementById('prevNationalityField');
-                    prevNationalityField.style.display = show ? 'block' : 'none';
-                }
-            </script>
-
-
             <!-- Personal Details Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
@@ -263,13 +267,16 @@
                         <div class="col-md-6">
                             <label class="form-label">
                                 Job Title<span style="color: red">*</span>
-                                <span 
-                                    class="text-primary ms-1" 
-                                    data-bs-toggle="tooltip" 
-                                    data-bs-placement="right" 
-                                    title='Ensure this matches the job title on your letter of invitation. If the applicant is a child, enter "Student"'>
-                                    <i class="bi bi-info-circle"></i>
-                                </span>
+                                <i class="fas fa-info-circle ms-1" 
+                                   data-tippy-content="<div class='tooltip-title'>Job Title Guidelines</div>
+                                   <p>Enter your current job title:</p>
+                                   <ul>
+                                     <li>Must match your invitation letter</li>
+                                     <li>Use official title, not description</li>
+                                     <li>If student, enter 'Student'</li>
+                                     <li>If retired, enter 'Retired'</li>
+                                   </ul>">
+                                </i>
                             </label>
                             {{ form.profession(class="form-control", placeholder="Enter profession") }}
                             {% if form.profession.errors %}
@@ -330,7 +337,6 @@
                 </div>
             </div>
 
-            
             <!-- Contact Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
@@ -482,7 +488,18 @@
                 </div>
                 <div class="section-content">
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.pass_num.id }}">{{ form.pass_num.label.text }}<span style="color: red">*</span></label>
+                        <label class="form-label" for="{{ form.pass_num.id }}">
+                            {{ form.pass_num.label.text }}<span style="color: red">*</span>
+                            <i class="fas fa-info-circle ms-1" 
+                               data-tippy-content="<div class='tooltip-title'>Passport Number</div>
+                               <p>Enter the number exactly as it appears on your passport.</p>
+                               <ul>
+                                 <li>Include all numbers and letters</li>
+                                 <li>Do not include spaces or special characters</li>
+                                 <li>Case sensitive - use uppercase letters</li>
+                               </ul>">
+                            </i>
+                        </label>
                         {{ form.pass_num(class="form-control", placeholder="Enter passport number") }}
                         {% if form.pass_num.errors %}
                             {% for error in form.pass_num.errors %}
@@ -493,7 +510,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">
-                            Country of Issue<span style="color: red"">*</span>
+                            Country of Issue<span style="color: red">*</span>
                             <span 
                                 class="text-primary ms-1" 
                                 data-bs-toggle="tooltip" 
@@ -613,7 +630,18 @@
                 <div class="section-content">
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label class="form-label" for="{{ form.arrival_date.id }}">{{ form.arrival_date.label.text }}<span style="color: red">*</span></label>
+                            <label class="form-label" for="{{ form.arrival_date.id }}">
+                                {{ form.arrival_date.label.text }}<span style="color: red">*</span>
+                                <i class="fas fa-info-circle ms-1" 
+                                   data-tippy-content="<div class='tooltip-title'>Travel Dates</div>
+                                   <p>Important date guidelines:</p>
+                                   <ul>
+                                     <li>Arrival date must be within visa validity</li>
+                                     <li>Cannot be more than 6 months in advance</li>
+                                     <li>Must match your travel itinerary</li>
+                                   </ul>">
+                                </i>
+                            </label>
                             {{ form.arrival_date(class="form-control", type="date") }}
                             {% if form.arrival_date.errors %}
                                 {% for error in form.arrival_date.errors %}
@@ -631,14 +659,13 @@
                                             <div class="invalid-feedback d-block">{{ error }}</div>
                                         {% endfor %}
                                     {% endif %}
-                                </div>
-                            </div>
+                                </div                            </div>
                         </div>
                     </div>
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label class="form-label">
-                                Departing City<span style="color: red"">*</span>
+                                Departing City<span style="color: red">*</span>
                                 <span 
                                     class="text-primary ms-1" 
                                     data-bs-toggle="tooltip" 
@@ -656,7 +683,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">
-                                Arriving City<span style="color: red"">*</span>
+                                Arriving City<span style="color: red">*</span>
                                 <span 
                                     class="text-primary ms-1" 
                                     data-bs-toggle="tooltip" 

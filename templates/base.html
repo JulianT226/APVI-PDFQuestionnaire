@@ -6,14 +6,36 @@
     <title>Saudi Visa Application - APVI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style> 
         @media (max-width: 576px) {
-        .progress-container {
-            display: none;
+            .progress-container {
+                display: none;
+            }
         }
-    }
+        /* Custom tooltip animations */
+        .tippy-box[data-animation=fade][data-state=hidden] {
+            opacity: 0;
+        }
+        .tippy-box {
+            background-color: var(--apvi-blue);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .tippy-arrow {
+            color: var(--apvi-blue);
+        }
+        .tooltip-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 4px;
+        }
     </style>
 </head>
 <body>
@@ -38,15 +60,30 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        
+
         {% block content %}{% endblock %}
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
     <script src="{{ url_for('static', filename='js/form_validation.js') }}"></script>
     <script src="{{ url_for('static', filename='js/form_navigation.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Initialize tooltips
+            tippy('[data-tippy-content]', {
+                animation: 'scale',
+                theme: 'custom',
+                maxWidth: 300,
+                allowHTML: true,
+                placement: 'right',
+                arrow: true,
+                duration: [275, 200],
+                interactive: true
+            });
+
+            // Initialize Bootstrap tooltips for backward compatibility
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
