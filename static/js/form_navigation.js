@@ -1,23 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('pdfForm');
     if (!form) {
-        // The form doesn't exist, so exit the script.
         return;
     }
     const formSections = form.querySelectorAll('.form-section');
     let currentSection = 0;
-
-    const usStates = [
-        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 
-        'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 
-        'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 
-        'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 
-        'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 
-        'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 
-        'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 
-        'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-    ];
-
 
     let pendingNavigationIndex = null;
 
@@ -78,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
             navigationButton.className = 'btn btn-primary';
             navigationButton.innerHTML = 'Next<i class="fas fa-arrow-right ms-2"></i>';
             
-            if (index === 1) {
-                // Special handling for step 2
+            if (index === 2) {
+                // Special handling for step 3
                 navigationButton.onclick = () => {
                     if (validateSection(index)) {
                         // Show the confirmation modal
@@ -143,12 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateSection(index) {
         const section = formSections[index];
         let isValid = true;
-        
-        console.log('Validating section:', index);
-        
-        // Only validate fields that are both required and visible
         const requiredFields = section.querySelectorAll('[required]:not([style*="display: none"])');
-        
         const checkedRadioGroups = {};
 
         requiredFields.forEach(field => {
@@ -161,9 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         isValid = false;
                         // Add invalid class to all radios in the group
                         const radios = section.querySelectorAll(`input[name="${name}"]`);
-                        radios.forEach(radio => {
-                            radio.classList.add('is-invalid');
-                        });
+                        radios.forEach(radio => radio.classList.add('is-invalid'));
                         // Create or update feedback message
                         let feedback = parent.querySelector('.invalid-feedback');
                         if (!feedback) {
@@ -175,17 +155,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         // Remove invalid class from all radios in the group
                         const radios = section.querySelectorAll(`input[name="${name}"]`);
-                        radios.forEach(radio => {
-                            radio.classList.remove('is-invalid');
-                        });
-                        // Remove feedback message
-                        const parent = field.closest('.radio-card-group') || field.parentNode;
+                        radios.forEach(radio => radio.classList.remove('is-invalid'));
                         const feedback = parent.querySelector('.invalid-feedback');
-                        if (feedback) {
-                            feedback.remove();
-                        }
+                        if (feedback) feedback.remove();
                     }
-                    // Mark this group as checked
                     checkedRadioGroups[name] = true;
                 }
             } else {

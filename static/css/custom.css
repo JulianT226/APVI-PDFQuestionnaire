@@ -17,6 +17,8 @@ body {
     width: 100%;
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
+    position: relative;
 }
 
 .radio-card {
@@ -99,12 +101,14 @@ body {
 
 /* Progress Steps */
 .progress-container {
-    padding: 2rem 0;
+    padding: 1rem 0;
+    border-radius: 8px;
+    background-color: #ffffff;
 }
 
 .progress-steps {
     position: relative;
-    padding: 0 1rem;
+    padding: 0 0rem;
 }
 
 .progress-steps::before {
@@ -286,18 +290,18 @@ body {
 
 /* Next Steps Styling */
 .next-steps-heading {
-    font-size: 1.75rem; /* Larger heading font size */
+    font-size: 1.75rem;
     font-weight: bold;
-    margin-bottom: 1.5rem; /* Increased spacing below */
+    margin-bottom: 1.5rem;
 }
 
 .next-steps-container {
-    font-size: 1.25rem; /* Larger font for list items */
-    padding: 25px; /* More padding inside the container */
-    margin-bottom: 2rem; /* Keep sufficient spacing below */
+    font-size: 1.25rem;
+    padding: 25px;
+    margin-bottom: 2rem;
 }
 
 .list-group-item {
-    font-size: 1.2rem; /* Slightly larger font size for items */
-    padding: 20px; /* Increased padding for better spacing */
+    font-size: 1.2rem;
+    padding: 20px;
 }
