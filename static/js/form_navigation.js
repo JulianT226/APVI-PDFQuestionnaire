@@ -5,13 +5,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     const formSections = form.querySelectorAll('.form-section');
     let currentSection = 0;
-
     let pendingNavigationIndex = null;
 
+    const nyEligibilityConfirmButton = document.getElementById('nyEligibilityModalConfirm');
+    if (nyEligibilityConfirmButton) {
+        nyEligibilityConfirmButton.onclick = () => {
+            if (pendingNavigationIndex !== null) {
+                navigateSection(pendingNavigationIndex);
+                pendingNavigationIndex = null;
+            }
+            // Hide the modal
+            const nyModalInstance = bootstrap.Modal.getInstance(document.getElementById('nyEligibilityModal'));
+            if (nyModalInstance) {
+                nyModalInstance.hide();
+            }
+        };
+    }
+    
     // Get the confirm button from the modal
-    const confirmButton = document.getElementById('jobTitleModalConfirm');
-    if (confirmButton) {
-        confirmButton.onclick = () => {
+    const jobTitleConfirmButton = document.getElementById('jobTitleModalConfirm');
+    if (jobTitleConfirmButton) {
+        jobTitleConfirmButton.onclick = () => {
             if (pendingNavigationIndex !== null) {
                 navigateSection(pendingNavigationIndex);
                 pendingNavigationIndex = null;
@@ -60,11 +74,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } else {
             // Not last section - add next button
-            navigationButton = document.createElement('button');
+            const navigationButton = document.createElement('button');
             navigationButton.type = 'button';
             navigationButton.className = 'btn btn-primary';
             navigationButton.innerHTML = 'Next<i class="fas fa-arrow-right ms-2"></i>';
-            
+
+            if (index === 0) {
+                // For example, if step 1 is where the user picks the consulate
+                navigationButton.onclick = () => {
+                    if (validateSection(index)) {
+                        const consulateSelect = document.getElementById('{{ form.state.id }}');
+                        if (consulateSelect.value === "New York, NY") {
+                            // Show the NY modal
+                            const nyModal = new bootstrap.Modal(document.getElementById('nyEligibilityModal'));
+                            nyModal.show();
+                            // Set the pending navigation index
+                            pendingNavigationIndex = index + 1;
+                        } else {
+                            // No modal needed, proceed
+                            navigateSection(index + 1);
+                        }
+                    }
+                };
+            }
             if (index === 2) {
                 // Special handling for step 3
                 navigationButton.onclick = () => {
@@ -183,40 +215,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-
-        if (index === 4) {  // Step 5 (Passport Information)
-            const passIssuePlaceField = section.querySelector('[name="pass_issue_place"]');
-            if (passIssuePlaceField) {
-                const inputValue = passIssuePlaceField.value.trim().toLowerCase();
-                const stateFound = usStates.some(state => state.toLowerCase() === inputValue);
-                if (stateFound) {
-                    isValid = false;
-                    // Show modal instead of alert
-                    const modalBody = document.querySelector('#validationModal .modal-body');
-                    modalBody.textContent = 'Please only enter the country of issue. Do NOT enter a state or province.';
-                    const validationModal = new bootstrap.Modal(document.getElementById('validationModal'));
-                    validationModal.show();
-                    // Add error class and message
-                    passIssuePlaceField.classList.add('is-invalid');
-                    let feedback = passIssuePlaceField.nextElementSibling;
-                    if (!feedback || !feedback.classList.contains('invalid-feedback')) {
-                        feedback = document.createElement('div');
-                        feedback.className = 'invalid-feedback d-block';
-                        feedback.textContent = 'Please only enter the country of issue. Do NOT enter a state or province.';
-                        passIssuePlaceField.parentNode.appendChild(feedback);
-                    }
-                } else {
-                    // Remove error if previously added
-                    passIssuePlaceField.classList.remove('is-invalid');
-                    const feedback = passIssuePlaceField.nextElementSibling;
-                    if (feedback && feedback.classList.contains('invalid-feedback')) {
-                        feedback.remove();
-                    }
-                }
-            }
-        }
-        
-        console.log('Validation result:', isValid);
         return isValid;
     }
 });

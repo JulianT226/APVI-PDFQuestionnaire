@@ -23,19 +23,7 @@
                         {% endif %}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">{{ form.visa_type.label.text }}
-                            <i class="fas fa-info-circle ms-1" 
-                               data-tippy-content="<div class='tooltip-title'>Visa Type Guide</div>
-                               <p>Select the visa type that best matches your travel purpose:</p>
-                               <ul>
-                                 <li><strong>Tourist:</strong> For leisure travel</li>
-                                 <li><strong>Business:</strong> For business meetings</li>
-                                 <li><strong>Work:</strong> For employment</li>
-                                 <li><strong>Student:</strong> For education</li>
-                               </ul>
-                               <p>Click 'What visa is right for me?' below for more details.</p>">
-                            </i>
-                        </label>
+                        {{ form.visa_type.label(class="form-label") }}
                         {{ form.visa_type(class="form-select") }}
                         {% if form.visa_type.errors %}
                             {% for error in form.visa_type.errors %}
@@ -63,22 +51,10 @@
                             <strong>Student</strong>: For individuals traveling to Saudi Arabia to pursue education at a university or other educational institutions.<br>
                         </p>
                         <p>
-                            <strong>Umrah</strong>: For Muslims traveling to perform the Umrah pilgrimage in Mecca, which can be done at any time of the year.<br>
-                        </p>
-                        <p>
-                            <strong>Hajj</strong>: For Muslims traveling to perform the Hajj pilgrimage, which occurs annually during specific dates.<br>
-                        </p>
-                        <p>
                             <strong>Diplomat</strong>: For diplomats and consular staff visiting or assigned to Saudi Arabia on official diplomatic missions.<br>
                         </p>
                         <p>
-                            <strong>Special</strong>: For unique or specialized travel arrangements that do not fall under standard visa categories, often for government or VIP-related visits.<br>
-                        </p>
-                        <p>
                             <strong>Personal Visit</strong>: For private, individual visits that are not family-related or work-related.<br>
-                        </p>
-                        <p>
-                            <strong>Re-entry</strong>: For residents who need a visa to re-enter Saudi Arabia after temporary travel abroad.<br>
                         </p>
                         <p>
                             <strong>Tourist</strong>: For those traveling strictly for tourism/leisure.<br>
@@ -97,12 +73,6 @@
                         </p>
                         <p>
                             <strong>Family Visit</strong>: For individuals visiting family members who live in Saudi Arabia.<br>
-                        </p>
-                        <p>
-                            <strong>Companion</strong>: For dependents or companions accompanying another individual traveling to Saudi Arabia, such as a family member of someone on a work or residence visa.<br>
-                        </p>
-                        <p>
-                            <strong>Transit</strong>: For travelers who need to stop in Saudi Arabia en route to another country. This visa is usually required for layovers or connecting flights where the traveler leaves the airport or stays for an extended period.<br>
                         </p>
                         <p>
                             <strong>Other</strong>: For travel purposes that do not fall under any of the above categories.<br>
@@ -236,7 +206,7 @@
                                 </div>
                                 {% endfor %}
                             </div>
-                            <div class="invalid-feedback d-block" style="display:none;"></div>
+                            <div class="invalid-feedback d-block" style="display: none;"></div>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">{{ form.marital_status.label.text }}<span style="color: red">*</span></label>
@@ -248,7 +218,7 @@
                                 </div>
                                 {% endfor %}
                             </div>
-                            <div class="invalid-feedback d-block" style="display:none;"></div>
+                            <div class="invalid-feedback d-block" style="display: none;"></div>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">{{ form.religion.label.text }}<span style="color: red">*</span></label>
@@ -260,23 +230,20 @@
                                 </div>
                                 {% endfor %}
                             </div>
-                            <div class="invalid-feedback d-block" style="display:none;"></div>
+                            <div class="invalid-feedback d-block" style="display: none;"></div>
                         </div>
                     </div>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">
                                 Job Title<span style="color: red">*</span>
-                                <i class="fas fa-info-circle ms-1" 
-                                   data-tippy-content="<div class='tooltip-title'>Job Title Guidelines</div>
-                                   <p>Enter your current job title:</p>
-                                   <ul>
-                                     <li>Must match your invitation letter</li>
-                                     <li>Use official title, not description</li>
-                                     <li>If student, enter 'Student'</li>
-                                     <li>If retired, enter 'Retired'</li>
-                                   </ul>">
-                                </i>
+                                <span 
+                                    class="text-primary ms-1" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="right" 
+                                    title='Ensure this matches the job title on your letter of invitation. If the applicant is a child, enter "Student"'>
+                                    <i class="bi bi-info-circle"></i>
+                                </span>
                             </label>
                             {{ form.profession(class="form-control", placeholder="Enter profession") }}
                             {% if form.profession.errors %}
@@ -337,6 +304,7 @@
                 </div>
             </div>
 
+            
             <!-- Contact Information Section -->
             <div class="form-section mb-4">
                 <div class="section-header">
@@ -426,18 +394,18 @@
                     <h3>Employment Information</h3>
                 </div>
                 <div class="section-content">
-                    <div class="mb-3">
+                    <div class="row g-3">
                         <label class="form-label">
                             <strong>Employer Address</strong>
                             <span 
                                 class="text-primary ms-1" 
                                 data-bs-toggle="tooltip" 
                                 data-bs-placement="right" 
-                                title="If the applicant is a child, leave blank and move to the next step.">
+                                title="If the applicant is a child, leave this blank and move to the next step.">
                                 <i class="bi bi-info-circle"></i>
                             </span>
                         </label>
-                        <div class="mb-3">
+                        <div class="col-md-6">
                             {{ form.bus_address_street.label(class="form-label") }}
                             {{ form.bus_address_street(class="form-control", placeholder="Enter your employer\'s street address") }}
                             {% if form.bus_address_street.errors %}
@@ -446,8 +414,6 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
-                    </div>
-                    <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             {{ form.bus_address_city.label(class="form-label") }}
                             {{ form.bus_address_city(class="form-control", placeholder="Enter city") }}
@@ -457,7 +423,10 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <br>
+                    <div class="row g-3">
+                        <div class="col-md-4">
                             {{ form.bus_address_state.label(class="form-label") }}
                             {{ form.bus_address_state(class="form-control", placeholder="Enter state/province") }}
                             {% if form.bus_address_state.errors %}
@@ -466,8 +435,26 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
+                        <div class="col-md-4">
+                            {{ form.bus_address_country.label(class="form-label") }}
+                            {{ form.bus_address_country(class="form-control", placeholder="Enter country") }}
+                            {% if form.bus_address_country.errors %}
+                                {% for error in form.bus_address_country.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.bus_address_zip.label(class="form-label") }}
+                            {{ form.bus_address_zip(class="form-control", placeholder="Enter zip code") }}
+                            {% if form.bus_address_zip.errors %}
+                                {% for error in form.bus_address_zip.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     </div>
-
+                    <br>
                     <div class="mb-3">
                         {{ form.bus_phone_num.label(class="form-label") }}
                         {{ form.bus_phone_num(class="form-control", placeholder="Enter your employer\'s phone number") }}
@@ -488,18 +475,7 @@
                 </div>
                 <div class="section-content">
                     <div class="mb-3">
-                        <label class="form-label" for="{{ form.pass_num.id }}">
-                            {{ form.pass_num.label.text }}<span style="color: red">*</span>
-                            <i class="fas fa-info-circle ms-1" 
-                               data-tippy-content="<div class='tooltip-title'>Passport Number</div>
-                               <p>Enter the number exactly as it appears on your passport.</p>
-                               <ul>
-                                 <li>Include all numbers and letters</li>
-                                 <li>Do not include spaces or special characters</li>
-                                 <li>Case sensitive - use uppercase letters</li>
-                               </ul>">
-                            </i>
-                        </label>
+                        <label class="form-label" for="{{ form.pass_num.id }}">{{ form.pass_num.label.text }}<span style="color: red">*</span></label>
                         {{ form.pass_num(class="form-control", placeholder="Enter passport number") }}
                         {% if form.pass_num.errors %}
                             {% for error in form.pass_num.errors %}
@@ -510,7 +486,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">
-                            Country of Issue<span style="color: red">*</span>
+                            Country of Issue<span style="color: red"">*</span>
                             <span 
                                 class="text-primary ms-1" 
                                 data-bs-toggle="tooltip" 
@@ -631,16 +607,7 @@
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label class="form-label" for="{{ form.arrival_date.id }}">
-                                {{ form.arrival_date.label.text }}<span style="color: red">*</span>
-                                <i class="fas fa-info-circle ms-1" 
-                                   data-tippy-content="<div class='tooltip-title'>Travel Dates</div>
-                                   <p>Important date guidelines:</p>
-                                   <ul>
-                                     <li>Arrival date must be within visa validity</li>
-                                     <li>Cannot be more than 6 months in advance</li>
-                                     <li>Must match your travel itinerary</li>
-                                   </ul>">
-                                </i>
+                                {{ form.arrival_date.label.text }}<span id="arrivalAsterisk" style="display: none; color: red;">*</span>
                             </label>
                             {{ form.arrival_date(class="form-control", type="date") }}
                             {% if form.arrival_date.errors %}
@@ -652,20 +619,22 @@
                         <div class="col-md-6">
                             <div id="departureDateNYSection">
                                 <div class="mb-3">
-                                    <label class="form-label" for="{{ form.departure_date.id }}">{{ form.departure_date.label.text }}<span style="color: red">*</span></label>
+                                    <label class="form-label" for="{{ form.departure_date.id }}">
+                                        {{ form.departure_date.label.text }}<span id="departureAsterisk" style="display: none; color: red">*</span></label>
                                     {{ form.departure_date(class="form-control", type="date") }}
                                     {% if form.departure_date.errors %}
                                         {% for error in form.departure_date.errors %}
                                             <div class="invalid-feedback d-block">{{ error }}</div>
                                         {% endfor %}
                                     {% endif %}
-                                </div                            </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label class="form-label">
-                                Departing City<span style="color: red">*</span>
+                                {{ form.departing_city.label.text }}<span id="departingCityAsterisk" style="display: none; color: red">*</span>
                                 <span 
                                     class="text-primary ms-1" 
                                     data-bs-toggle="tooltip" 
@@ -683,7 +652,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">
-                                Arriving City<span style="color: red">*</span>
+                                {{ form.arriving_city.label.text }}<span id="arrivingCityAsterisk" style="display: none; color: red"">*</span>
                                 <span 
                                     class="text-primary ms-1" 
                                     data-bs-toggle="tooltip" 
@@ -703,7 +672,9 @@
                     
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            {{ form.airline.label(class="form-label") }}
+                            <label class="form-label" for="{{ form.airline.id }}">
+                                {{ form.airline.label(class="form-label") }}<span id="airlineAsterisk" style="display: none; color: red">*</span>
+                            </label>
                             {{ form.airline(class="form-control", placeholder="Enter airline name") }}
                             {% if form.airline.errors %}
                                 {% for error in form.airline.errors %}
@@ -712,7 +683,9 @@
                             {% endif %}
                         </div>
                         <div class="col-md-6">
-                            {{ form.flight_num.label(class="form-label") }}
+                            <label class="form-label" for="{{ form.flight_num.id }}"> 
+                                {{ form.flight_num.label(class="form-label") }}<span id="flightAsterisk" style="display: none; color: red">*</span>
+                            </label>
                             {{ form.flight_num(class="form-control", placeholder="Enter flight number") }}
                             {% if form.flight_num.errors %}
                                 {% for error in form.flight_num.errors %}
@@ -723,7 +696,9 @@
                     </div>
 
                     <div class="mb-3">
-                        {{ form.stay_duration.label(class="form-label") }}
+                        <label class="form-label" for="{{ form.stay_duration.id }}">
+                            {{ form.stay_duration.label(class="form-label") }}<span id="stayDurationAsterisk" style="display: none; color: red">*</span>
+                        </label>
                         {{ form.stay_duration(class="form-control", placeholder="Enter duration of stay, e.g. '2 weeks'") }}
                         {% if form.stay_duration.errors %}
                             {% for error in form.stay_duration.errors %}
@@ -808,7 +783,7 @@
                                         </div>
                                         {% endfor %}
                                     </div>
-                                    <div class="invalid-feedback d-block" style="display:none;"></div>
+                                    <div class="invalid-feedback d-block" style="display: none;"></div>
                                 </div>
                             </div>
                         </div>
@@ -850,6 +825,26 @@
   </div>
 </div>
 
+<!-- NY Eligibility Modal -->
+<div class="modal fade" id="nyEligibilityModal" tabindex="-1" aria-labelledby="nyEligibilityModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"> 
+        <h5 class="modal-title" id="nyEligibilityModalLabel">New York Eligibility</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        You must reside in one of the New York jurisdiction states to apply through this consulate.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="nyEligibilityModalConfirm">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Job Title Check -->
 <div class="modal fade" id="jobTitleModal" tabindex="-1" aria-labelledby="jobTitleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -870,6 +865,12 @@
 
 <script>
 
+
+function togglePrevNationality(show) {
+    const prevNationalityField = document.getElementById('prevNationalityField');
+    prevNationalityField.style.display = show ? 'block' : 'none';
+}
+    
 function toggleNYFields() {
     const motherNYSection = document.getElementById('motherNYSection');
     const travelCompanionNYSection = document.getElementById('travelCompanionNYSection');
@@ -892,9 +893,7 @@ const nyVisaOptions = [
     {value: 'WORK', text: 'Work'},
     {value: 'TRANSIT', text: 'Transit'},
     {value: 'VISIT', text: 'Visit'},
-    {value: 'UMRAH', text: 'Umrah'},
     {value: 'RESIDENCE', text: 'Residential'},
-    {value: 'HAJJ', text: 'Hajj'},
     {value: 'DIPLOMACY', text: 'Diplomacy'}
 ];
 
@@ -902,19 +901,13 @@ const allVisaOptions = [
     {value: 'EMPLOYMENT', text: 'Work'},
     {value: 'RESIDENCE', text: 'Residential'},
     {value: 'STUDENT', text: 'Student'},
-    {value: 'UMRAH', text: 'Umrah'},
-    {value: 'HAJJ', text: 'Hajj'},
     {value: 'DIPLOMAT', text: 'Diplomat'},
-    {value: 'SPECIAL', text: 'Special'},
     {value: 'PERSONNEL', text: 'Personal Visit'},
-    {value: 'REENTRY', text: 'Re-entry'},
-    {value: 'TOURISM', text: 'Tourism'},
     {value: 'COMMERCE', text: 'Commerce'},
     {value: 'BUSINESSMEN', text: 'Business'},
     {value: 'GOVERNMENT', text: 'Government'},
-    {value: 'WORK VISIT', text: 'Work Visit'},
+    {value: 'WORK VISIT', text: 'Temporary Work'},
     {value: 'FAMILY VISIT', text: 'Family Visit'},
-    {value: 'COMPANION', text: 'Companion'},
     {value: 'OTHER', text: 'Other'}
 ];
 
@@ -937,6 +930,57 @@ function toggleNYVisaDropdown() {
         });
     }
 }
+
+function toggleTravelRequirements() {
+    const stateSelect = document.getElementById('{{ form.state.id }}');
+    const selectedState = stateSelect.value;
+
+    // Are the fields required?
+    const isRequired = (selectedState === "New York, NY" || selectedState === "Los Angeles, CA");
+
+    // Grab references to your travel fields
+    const travelFields = [
+        document.getElementById('{{ form.arrival_date.id }}'),
+        document.getElementById('{{ form.departure_date.id }}'),
+        document.getElementById('{{ form.airline.id }}'),
+        document.getElementById('{{ form.flight_num.id }}'),
+        document.getElementById('{{ form.departing_city.id }}'),
+        document.getElementById('{{ form.arriving_city.id }}'),
+        document.getElementById('{{ form.stay_duration.id }}')
+    ];
+
+    // Toggle "required" attribute based on state
+    travelFields.forEach(field => {
+        if (field) {
+            if (isRequired) {
+                field.setAttribute('required', 'required');
+            } else {
+                field.removeAttribute('required');
+            }
+        }
+    });
+
+    const arrivalAsterisk = document.getElementById('arrivalAsterisk');
+    const departureAsterisk = document.getElementById('departureAsterisk');
+    const airlineAsterisk = document.getElementById('airlineAsterisk');
+    const flightAsterisk = document.getElementById('flightAsterisk');
+    const departingAsterisk = document.getElementById('departingCityAsterisk');
+    const arrivingAsterisk = document.getElementById('arrivingCityAsterisk');
+    const stayDurationAsterisk = document.getElementById('stayDurationAsterisk');
+
+    function setAsteriskDisplay(el) {
+        if (!el) return;
+        el.style.display = isRequired ? 'inline' : 'none';
+    }
+    setAsteriskDisplay(arrivalAsterisk);
+    setAsteriskDisplay(departureAsterisk);
+    setAsteriskDisplay(airlineAsterisk);
+    setAsteriskDisplay(flightAsterisk);
+    setAsteriskDisplay(departingAsterisk);
+    setAsteriskDisplay(arrivingAsterisk);
+    setAsteriskDisplay(stayDurationAsterisk);
+}
+
     
 document.addEventListener('DOMContentLoaded', toggleNYVisaDropdown)
 document.getElementById('{{ form.state.id }}')
@@ -945,10 +989,13 @@ document.getElementById('{{ form.state.id }}')
 // Run once on load
 document.addEventListener('DOMContentLoaded', function() {
     toggleNYFields();
-
+    toggleTravelRequirements();
     // Also run whenever the user changes the state
     const stateSelect = document.getElementById('{{ form.state.id }}');
-    stateSelect.addEventListener('change', toggleNYFields);
+    stateSelect.addEventListener('change', function() {
+        toggleNYFields();
+        toggleTravelRequirements();
+    });
 });
 </script>
 

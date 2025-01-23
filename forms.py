@@ -8,7 +8,9 @@ class PDFForm(FlaskForm):
     state = SelectField(
         'Which consulate office are you applying through?',
         choices=[
-            ('Washington, DC', 'Washington, DC'), ('Houston, TX', 'Houston, TX'), ('Los Angeles, CA', 'Los Angeles, CA'), ('New York, NY', 'New York, NY')
+            ('Washington, DC', 'Washington, DC'),
+            ('Los Angeles, CA', 'Los Angeles, CA'),
+            ('New York, NY', 'New York, NY')
         ],
         validators=[DataRequired()]
     )
@@ -69,6 +71,8 @@ class PDFForm(FlaskForm):
     bus_address_street = StringField('Street', validators=[Optional(), Length(max=200)])
     bus_address_city = StringField('City', validators=[Optional(), Length(max=100)])
     bus_address_state = StringField('State/Province', validators=[Optional(), Length(max=100)])
+    bus_address_country = StringField('Country', validators=[Optional(), Length(max=100)])
+    bus_address_zip = StringField('Zip Code', validators=[Optional(), Length(max=10)])
     bus_phone_num = StringField('Phone Number', validators=[Optional(), Length(min=10, max=15)])
 
     # Visa Information
@@ -97,12 +101,12 @@ class PDFForm(FlaskForm):
     inviting_address_country = StringField('Country', validators=[Optional(), Length(max=100)])
 
     # Travel Information
-    arrival_date = DateField('Arrival Date', validators=[DataRequired()])
+    arrival_date = DateField('Arrival Date', validators=[Optional()])
     departure_date = DateField('Departure Date', validators=[Optional()])
     airline = StringField('Airline', validators=[Optional(), Length(max=100)])
     flight_num = StringField('Flight Number', validators=[Optional(), Length(max=20)])
-    departing_city = StringField('Departing City', validators=[DataRequired(), Length(max=100)])
-    arriving_city = StringField('Arriving City', validators=[DataRequired(), Length(max=100)])
+    departing_city = StringField('Departing City', validators=[Optional(), Length(max=100)])
+    arriving_city = StringField('Arriving City', validators=[Optional(), Length(max=100)])
     stay_duration = StringField('Stay Duration', validators=[Optional(), Length(max=50)])
 
     # Traveling Companion

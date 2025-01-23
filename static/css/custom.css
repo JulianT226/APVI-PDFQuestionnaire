@@ -7,12 +7,6 @@ body {
     background-color: #f8f9fa;
 }
 
-.required::after {
-    content: '*';
-    color: #dc3545;
-    margin-left: 4px;
-}
-
 .radio-card-group {
     width: 100%;
     display: flex;
@@ -260,33 +254,6 @@ body {
 .form-navigation .btn {
     min-width: 120px;
 }
-.radio-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-}
-
-.radio-stack .form-check {
-    margin: 0;
-    padding-left: 2rem;
-}
-
-.radio-stack .form-check-input {
-    margin-left: -2rem;
-}
-
-.radio-stack .form-check-label {
-    font-size: 1rem;
-    color: #212529;
-}
-
-.radio-stack .form-check-input:checked {
-    background-color: var(--apvi-blue);
-    border-color: var(--apvi-blue);
-}
 
 /* Next Steps Styling */
 .next-steps-heading {
@@ -304,84 +271,4 @@ body {
 .list-group-item {
     font-size: 1.2rem;
     padding: 20px;
-}
-
-/* Add these styles to the end of the file */
-
-/* Tooltip icon styling */
-.fas.fa-info-circle {
-    color: var(--apvi-blue);
-    cursor: help;
-    transition: color 0.2s ease;
-}
-
-.fas.fa-info-circle:hover {
-    color: var(--apvi-light-blue);
-}
-
-/* Custom tooltip styling */
-.tippy-box[data-theme~='custom'] {
-    background-color: var(--apvi-blue);
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.tippy-box[data-theme~='custom'][data-placement^='top'] > .tippy-arrow::before {
-    border-top-color: var(--apvi-blue);
-}
-
-.tippy-box[data-theme~='custom'][data-placement^='bottom'] > .tippy-arrow::before {
-    border-bottom-color: var(--apvi-blue);
-}
-
-.tippy-box[data-theme~='custom'][data-placement^='left'] > .tippy-arrow::before {
-    border-left-color: var(--apvi-blue);
-}
-
-.tippy-box[data-theme~='custom'][data-placement^='right'] > .tippy-arrow::before {
-    border-right-color: var(--apvi-blue);
-}
-
-/* Tooltip content styling */
-.tooltip-title {
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.tippy-content ul {
-    margin: 8px 0;
-    padding-left: 20px;
-}
-
-.tippy-content li {
-    margin-bottom: 4px;
-}
-
-.tippy-content p {
-    margin: 8px 0;
-    line-height: 1.4;
-}
-
-/* Tooltip animation enhancements */
-.tippy-box[data-animation='scale'] {
-    transform-origin: top;
-}
-
-.tippy-box[data-animation='scale'][data-placement^='bottom'] {
-    transform-origin: top;
-}
-
-.tippy-box[data-animation='scale'][data-placement^='top'] {
-    transform-origin: bottom;
-}
-
-.tippy-box[data-animation='scale'][data-placement^='left'] {
-    transform-origin: right;
-}
-
-.tippy-box[data-animation='scale'][data-placement^='right'] {
-    transform-origin: left;
 }
