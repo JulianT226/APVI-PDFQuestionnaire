@@ -14,6 +14,24 @@ class PDFForm(FlaskForm):
         ],
         validators=[DataRequired()]
     )
+
+    # Visa Selection
+    visa_type = SelectField(
+        'Visa Type',
+        choices=[
+            ('EMPLOYMENT', 'Work'), ('RESIDENCE', 'Residential'),
+            ('STUDENT', 'Student'), ('UMRAH', 'Umrah'),
+            ('HAJJ', 'Hajj'), ('DIPLOMAT', 'Diplomat'),
+            ('SPECIAL', 'Special'), ('PERSONNEL', 'Personnel'),
+            ('REENTRY', 'Re-entry'), ('TOURISM', 'Tourist'),
+            ('COMMERCE', 'Commerce'), ('BUSINESS', 'Business'),
+            ('GOVERNMENT', 'Government'), ('WORK VISIT', 'Work Visit'),
+            ('FAMILY VISIT', 'Family Visit'), ('OTHER', 'Other'),
+            ('COMPANION', 'Companion')
+        ],
+        validators=[DataRequired()]
+    )
+    
     # Personal Information
     first_name = StringField('First Name', validators=[DataRequired(), Length(max=50)])
     middle_name = StringField('Middle Name', validators=[Optional(), Length(max=50)])
@@ -75,25 +93,8 @@ class PDFForm(FlaskForm):
     bus_address_zip = StringField('Zip Code', validators=[Optional(), Length(max=10)])
     bus_phone_num = StringField('Phone Number', validators=[Optional(), Length(min=10, max=15)])
 
-    # Visa Information
-    visa_type = SelectField(
-        'Visa Type',
-        choices=[
-            ('EMPLOYMENT', 'Work'), ('RESIDENCE', 'Residential'),
-            ('STUDENT', 'Student'), ('UMRAH', 'Umrah'),
-            ('HAJJ', 'Hajj'), ('DIPLOMAT', 'Diplomat'),
-            ('SPECIAL', 'Special'), ('PERSONNEL', 'Personnel'),
-            ('REENTRY', 'Re-entry'), ('TOURISM', 'Tourist'),
-            ('COMMERCE', 'Commerce'), ('BUSINESSMEN', 'Business'),
-            ('GOVERNMENT', 'Government'), ('WORK VISIT', 'Work Visit'),
-            ('FAMILY VISIT', 'Family Visit'), ('OTHER', 'Other'),
-            ('COMPANION', 'Companion')
-        ],
-        validators=[DataRequired()]
-    )
-
     # Invitation Details
-    inviting_name = StringField('Name', validators=[DataRequired(), Length(max=200)])
+    inviting_name = StringField('Name', validators=[Optional(), Length(max=200)])
     inviting_address_street = StringField('Street', validators=[Optional(), Length(max=200)])
     inviting_address_city = StringField('City', validators=[Optional(), Length(max=100)])
     inviting_address_province = StringField('Province', validators=[Optional(), Length(max=100)])

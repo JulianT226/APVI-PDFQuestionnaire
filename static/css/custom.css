@@ -92,6 +92,17 @@ body {
     font-size: 0.85rem;
     font-style: italic;
 }
+@media (max-width: 776px) {
+    .need-help {
+        display: none;
+    }
+    .phone-number {
+        display: none;
+    }
+    .tagline {
+        display: none;
+    }
+}
 
 /* Progress Steps */
 .progress-container {
@@ -101,6 +112,9 @@ body {
 }
 
 .progress-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     position: relative;
     padding: 0 0rem;
 }
@@ -231,6 +245,8 @@ body {
 .btn-outline-primary {
     color: var(--apvi-blue);
     border-color: var(--apvi-blue);
+    padding: 0.75rem 2rem;
+    font-weight: 500;
 }
 
 .btn-outline-primary:hover {
@@ -271,4 +287,29 @@ body {
 .list-group-item {
     font-size: 1.2rem;
     padding: 20px;
+}
+
+/* Review page */
+
+.card-header {
+    background-color: var(--apvi-blue) !important;
+    color: #fff !important;
+    font-weight: bold;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.card-header a.btn-outline-primary {
+    color: #fff !important;       /* Make text white on the blue background */
+    border-color: #fff !important; /* White border for contrast */
+}
+
+.card-header a.btn-outline-primary:hover {
+    color: var(--apvi-blue) !important; 
+    background-color: #fff !important; 
+}
+
+.col-md-10 {
+    padding-bottom: 3rem;
 }

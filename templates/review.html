@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <h2 class="mb-4">Review Your Application</h2>
+
+        <!-- Visa Selection Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Visa Selection
+                <a href="{{ url_for('index') }}?section=visa" class="btn btn-sm btn-outline-primary float-end">Edit</a>
+            </div>
+            <div class="card-body">
+                <p><strong>Consulate Office:</strong> {{ session['form_data']['state'] }}</p>
+                <p><strong>Visa Type:</strong> {{ session['form_data']['visa_type'] }}</p>
+            </div>
+        </div>
+
+        <!-- Personal Information Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Personal Information
+                <a href="{{ url_for('index') }}?section=personal" class="btn btn-sm btn-outline-primary float-end">Edit</a>
+            </div>
+            <div class="card-body">
+                <p><strong>Full Name:</strong> {{ session['form_data']['first_name'] }} {{ session['form_data']['middle_name'] }} {{ session['form_data']['last_name'] }}</p>
+                <p><strong>Date of Birth:</strong> {{ session['form_data']['dob'] }}</p>
+                <p><strong>Country of Birth:</strong> {{ session['form_data']['birth_place'] }}</p>
+                <p><strong>Current Nationality:</strong> {{ session['form_data']['present_nationality'] }}</p>
+                <p><strong>Previous Nationality:</strong> {{ session['form_data']['prev_nationality'] }}</p>
+            </div>
+        </div>
+
+        <!-- Personal Details Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Personal Details
+                <a href="{{ url_for('index') }}?section=details" class="btn btn-sm btn-outline-primary float-end">Edit</a>
+            </div>
+            <div class="card-body">
+                <p><strong>Sex:</strong> {{ session['form_data']['sex'] }}</p>
+                <p><strong>Marital Status:</strong> {{ session['form_data']['marital_status'] }}</p>
+                <p><strong>Religion:</strong> {{ session['form_data']['religion'] }}</p>
+                <p><strong>Profession:</strong> {{ session['form_data']['profession'] }}</p>
+                <p><strong>Qualification:</strong> {{ session['form_data']['qualification'] }}</p>
+            </div>
+        </div>
+
+        <!-- Contact Information Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Contact Information
+                <a href="{{ url_for('index') }}?section=contact" class="btn btn-sm btn-outline-primary float-end">Edit</a>
+            </div>
+            <div class="card-body">
+                <p><strong>Email:</strong> {{ session['form_data']['email'] }}</p>
+                <p><strong>Phone Number:</strong> {{ session['form_data']['phone_num'] }}</p>
+                <p><strong>Address:</strong> {{ session['form_data']['address_street'] }}, {{ session['form_data']['address_city'] }}, {{ session['form_data']['address_state'] }}, {{ session['form_data']['address_country'] }}{% if session['form_data']['address_zip'] %}, {{ session['form_data']['address_zip'] }}{% endif %}</p>
+            </div>
+        </div>
+
+        <!-- Passport Information Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Passport Information
+                <a href="{{ url_for('index') }}?section=passport" class="btn btn-sm btn-outline-primary float-end">Edit</a>
+            </div>
+            <div class="card-body">
+                <p><strong>Passport Number:</strong> {{ session['form_data']['pass_num'] }}</p>
+                <p><strong>Country of Issue:</strong> {{ session['form_data']['pass_issue_place'] }}</p>
+                <p><strong>Date of Expiration:</strong> {{ session['form_data']['pass_exp'] }}</p>
+                <p><strong>Issue Date:</strong> {{ session['form_data']['pass_iss'] }}</p>
+            </div>
+        </div>
+
+        <!-- Employment Information Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Employment Information
+                <a href="{{ url_for('index') }}?section=employment" class="btn btn-sm btn-outline-primary float-end">Edit</a>
+            </div>
+            <div class="card-body">
+                <p><strong>Employer Address:</strong>
+                    {% if session['form_data']['bus_address_street'] %}
+                        {{ session['form_data']['bus_address_street'] }} {{ session['form_data']['bus_address_city'] }} {{ session['form_data']['bus_address_state'] }} {% if session['form_data']['bus_address_zip'] %} {{ session['form_data']['bus_address_zip'] }} {{ session['form_data']['bus_address_country'] }}{% endif %}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </p>
+                <p><strong>Employer Phone:</strong> {{ session['form_data']['bus_phone_num'] or "N/A" }}</p>
+            </div>
+        </div>
+
+        <!-- Inviting Person/Organization Information Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Inviting Person/Organization Information
+                <a href="{{ url_for('index') }}?section=inviting" class="btn btn-sm btn-outline-primary float-end">Edit</a>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> {{ session['form_data']['inviting_name'] or "N/A" }}</p>
+                <p><strong>Address:</strong> {{ session['form_data']['inviting_address_street'] }} {{ session['form_data']['inviting_address_city'] }} {{ session['form_data']['inviting_address_province'] }} {{ session['form_data']['inviting_address_postal_code'] }} {{ session['form_data']['inviting_address_country'] }}</p>
+            </div>
+        </div>
+
+        <!-- Travel Information Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Travel Information
+                <a href="{{ url_for('index') }}?section=travel" class="btn btn-sm btn-outline-primary float-end">Edit</a>
+            </div>
+            <div class="card-body">
+                <p><strong>Arrival Date:</strong> {{ session['form_data']['arrival_date'] }}</p>
+                <p><strong>Departure Date:</strong> {{ session['form_data']['departure_date'] }}</p>
+                <p><strong>Airline:</strong> {{ session['form_data']['airline'] }}</p>
+                <p><strong>Flight Number:</strong> {{ session['form_data']['flight_num'] }}</p>
+                <p><strong>Departing City:</strong> {{ session['form_data']['departing_city'] }}</p>
+                <p><strong>Arriving City:</strong> {{ session['form_data']['arriving_city'] }}</p>
+                <p><strong>Stay Duration:</strong> {{ session['form_data']['stay_duration'] }}</p>
+            </div>
+        </div>
+
+        <!-- Child Applicant Information Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Child Applicant Information
+                <a href="{{ url_for('index') }}?section=child" class="btn btn-sm btn-outline-primary float-end">Edit</a>
+            </div>
+            <div class="card-body">
+                <p><strong>Is this application for a child?</strong> {{ session['form_data']['is_child'] }}</p>
+                {% if session['form_data']['is_child'] == 'Yes' %}
+                <p><strong>Traveling Companion:</strong> {{ session['form_data']['traveling_companion_first_name'] }} {{ session['form_data']['traveling_companion_middle_name'] }} {{ session['form_data']['traveling_companion_last_name'] }}</p>
+                <p><strong>Companion's Date of Birth:</strong> {{ session['form_data']['traveling_companion_dob'] }}</p>
+                <p><strong>Companion's Sex:</strong> {{ session['form_data']['traveling_companion_sex'] }}</p>
+                <p><strong>Relationship with Applicant:</strong> {{ session['form_data']['traveling_companion_relationship'] }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Confirmation Form -->
+        <form method="POST" action="{{ url_for('index') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <!-- Hidden field to indicate the review is confirmed -->
+            <input type="hidden" name="confirmed" value="true">
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Confirm and Download Application</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
